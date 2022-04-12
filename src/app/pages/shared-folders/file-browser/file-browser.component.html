@@ -1,0 +1,56 @@
+<div class="map-container">
+  <div>
+    <button type="button" class="card-header-action btn btn-lg btn-cil-plus" (click)="goToHomeDirectory()"
+      popover="Home" triggers="mouseenter:mouseleave"><i class="cil-home"></i></button>
+  </div>
+  <div>
+    <button type="button" class="card-header-action btn btn-lg btn-cil-plus" (click)="goToBackDirectory()"
+      popover="Back" triggers="mouseenter:mouseleave" [disabled]="isRootPath()"><i
+        class="cil-arrow-circle-left"></i></button>
+  </div>
+  <div>
+    <button type="button" class="card-header-action btn btn-lg btn-cil-plus" (click)="refresh()" popover="Refresh"
+      triggers="mouseenter:mouseleave"><i class="cil-reload"></i></button>
+  </div>
+  <div class="address-bar">
+    <div class="address link" *ngFor="let address of getAddressList(); index as i" (click)="goDirectoryByIndex(i)">
+      {{address}}
+    </div>
+  </div>
+
+</div>
+
+<p-table [value]="directoryContent" styleClass="p-datatable-sm p-datatable-striped" sortMode="multiple"
+  [rowHover]="true" [autoLayout]="true" [paginator]="true" [rows]="15" [showCurrentPageReport]="true"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [rowsPerPageOptions]="[15,50,100]">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 36px;"></th>
+      <th pSortableColumn="name">
+        Name
+      </th>
+      <th pSortableColumn="size" style="width: 120px;">
+        Size
+      </th>
+      <th pSortableColumn="modifiedDate" style="width: 160px;">
+        Modified
+      </th>
+    </tr>
+  </ng-template>
+
+  <ng-template pTemplate="body" let-sharing>
+
+    <tr [class.link]="sharing.isFolder" class="noselect" (dblclick)="goToDirectory(sharing)">
+      <td> <img
+          [src]="sharing.isFolder ? '../../../../assets/img/file-extensions/folder-icon.png' : '../../../../assets/img/file-extensions/file-icon.png'"
+          [attr.width]="sharing.isFolder ? '21px' : '18px'"> </td>
+      <td>{{sharing.name}}</td>
+      <td style="text-align: start; padding-right: 18px;">{{sharing.size | sizeConvertion}}</td>
+      <td>{{dateFormat(sharing.modifiedDate)}}</td>
+    </tr>
+
+  </ng-template>
+
+</p-table>
+
+<ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

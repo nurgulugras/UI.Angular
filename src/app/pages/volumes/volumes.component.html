@@ -1,0 +1,20 @@
+<div class="animated fadeIn" dynamicFixedFullHeight>
+  <div class="row" style="height: 100%;">
+    <div class="col">
+
+      <div class="flex-container">
+
+        <div class="flex-item" style="width: 400px;">
+          <esa-volume-list (onSelectedVolumeChanged)="onSelectedVolumeChanged($event)"></esa-volume-list>
+        </div>
+
+        <div class="flex-item" style="width: 100%">
+          <esa-volume-overview (onVolumeDeleted)="onVolumeDeleted()" [selectedVolume]="selectedVolume">
+          </esa-volume-overview>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>

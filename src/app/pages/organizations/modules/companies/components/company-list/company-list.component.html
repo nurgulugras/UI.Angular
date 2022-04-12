@@ -1,0 +1,47 @@
+<div class="card">
+    <div class="card-header">
+        <div class="d-flex align-items-center">
+            <div class="node-title-icon"><i [class]="_cardVolumeChildTitleIcon"></i></div>
+            <div>Şirket Listesi</div>
+            <div class="ml-auto">
+                <button *ngIf="isSelectedAnyOrganization()" type="button" class="btn btn-smx btn-ghost-secondary text-dark" popover="Download Excel" triggers="mouseenter:mouseleave" (click)="exportToExcel()"><i class="cil-data-transfer-down"></i></button>
+                <button *ngIf="isSelectedAnyOrganization()" type="button" class="btn btn-smx btn-ghost-secondary text-dark" (click)="refresh()" popover="Refresh List" triggers="mouseenter:mouseleave"><i class="cil-reload"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <p-table *ngIf="isSelectedAnyOrganization()" [value]="companies" styleClass="p-datatable-sm" [rowHover]="true" [paginator]="true" [resizableColumns]="true" [autoLayout]="true" [showCurrentPageReport]="true" [rows]="5" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [rowsPerPageOptions]="[5,15,50]">
+            <!-- [lazy]="true" [loading]="loading" (onLazyLoad)="loadCustomers($event)" [paginator]="true" [totalRecords]="totalRecords" [rows]="rows" -->
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="createDate" style="width: 140px;">Oluşturma Tarihi</th>
+                    <th pSortableColumn="name">Şirket Adı</th>
+                    <th pSortableColumn="isActive" style="width: 100px;">Aktif Mi?</th>
+                    <th style="width: 30px;"></th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-company>
+                <tr>
+                    <td>{{dateFormat(company.createDate)}}</td>
+                    <td>{{company.name}}</td>
+                    <td style="padding: 0; text-align: center;">
+                        <button type="button" class="btn btn-success btn-pill btn-sm ml-1" *ngIf="company.isActive"><i
+                class="fa fa-check"></i></button>
+                        <span *ngIf="!company.isActive"> - </span>
+                    </td>
+                    <td style="padding: 0;">
+
+                        <button #btn type="button" class="btn btn-primary btn-sm ml-1" popover="Ürün Güncelle" triggers="mouseenter:mouseleave" (click)="setSelectedCompany(company)"><i class="cil-pen"></i></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
+</div>
+
+<ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

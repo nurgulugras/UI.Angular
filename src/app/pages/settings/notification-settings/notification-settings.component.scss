@@ -1,0 +1,112 @@
+:host{
+    th, td {
+        border: 1px solid rgb(230, 230, 230);
+        border-collapse: collapse;
+      }
+    
+    table {
+        
+        background-color: #fdfdfd;
+        width: auto;
+
+        thead{
+            background-color: #f0f3f5;
+            th{
+                padding: 4px;
+            }
+        }
+
+        input{
+            //border: none;
+            background-color: #f0f3f5;
+            font-size: 1.04rem; 
+            color: black;
+        }
+
+        tr{
+            -webkit-transition: background-color 200ms linear;
+            -ms-transition: background-color 200ms linear;
+            transition: background-color 200ms linear;
+
+            &.error-row{
+                background-color: #fff0f0;
+            }
+
+            &.activeConfig{
+                background-color:rgb(226 232 236);
+                -webkit-transition: background-color 200ms linear;
+                -ms-transition: background-color 200ms linear;
+                transition: background-color 200ms linear;
+            }
+        }
+        td{
+            padding: 8px;
+        }
+
+        tr{
+            button{
+                &.hidden-hover{
+                        /* IE 8 */
+                    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+
+                    /* IE 5-7 */
+                    filter: alpha(opacity=20);
+
+                    /* Netscape */
+                    -moz-opacity: 0.2;
+
+                    /* Safari 1.x */
+                    -khtml-opacity: 0.2;
+
+                    /* Good browsers */
+                    opacity: 0.2;
+                }
+            }
+        }
+
+        tr:hover{
+
+            button{
+                &.hidden-hover{
+                        /* IE 8 */
+                        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+
+                        /* IE 5-7 */
+                        filter: alpha(opacity=100);
+    
+                        /* Netscape */
+                        -moz-opacity: 1;
+    
+                        /* Safari 1.x */
+                        -khtml-opacity: 1;
+    
+                        /* Good browsers */
+                        opacity: 1;
+                }
+            }
+        }
+       
+        td:first-child {
+              border-right: 0px solid rgb(255, 255, 255) !important;
+        }
+        td:last-child {
+              border-left: 0px solid rgb(255, 255, 255) !important;
+        }
+        th{
+           text-align: center;
+        }
+        .center{
+            text-align: center;
+        }
+    }
+    .plpr{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .ignore-boder-r{
+        border-right: 1px solid rgb(255, 255, 255) !important;
+    }
+    .ignore-boder-l{
+        border-left: 1px solid rgb(255, 255, 255) !important;
+    }
+}

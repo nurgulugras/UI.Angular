@@ -1,0 +1,56 @@
+<div class="card card-accent-primary" style="height: 100%;">
+  <div class="card-header">
+    <strong>Log Details</strong>
+  </div>
+  <div class="card-body">
+
+    <form #formid="ngForm" [formGroup]="formGroup" action="" method="post" enctype="multipart/form-data"
+      style="height: 100%;" class="form-horizontal">
+
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Create Date:</label>
+        <div class="col-md-4">
+          <div class="form-control noclick">{{eventLog ? dateFormat(eventLog.createDate): ''}}</div>
+          <!-- <input type="text" name="text-input" class="form-control noclick" [(value)]="asfasf"> -->
+        </div>
+        <label class="col-md-2 col-form-label" for="text-input">Create User:</label>
+        <div class="col-md-4">
+          <input type="text" name="text-input" class="form-control noclick" formControlName="createUserName">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Log Type:</label>
+        <div class="col-md-4">
+          <input type="text" name="text-input" class="form-control noclick" formControlName="type">
+        </div>
+        <label class="col-md-2 col-form-label" for="text-input">Log Level:</label>
+        <div class="col-md-4">
+          <h5>
+            <span class="link badge mt-2" [ngClass]="getBadgeClassByLevel()">{{eventLog ? eventLog.level : ''}}</span>
+          </h5>
+        </div>
+      </div>
+
+      <div class="form-group row" style="height: 100%;">
+        <div class="col" style="height: 100%;">
+          <label for="log-message">Message</label>
+          <textarea id="log-message" name="log-message" class="form-control noclick" formControlName="message"
+            style="height: 80%;"></textarea>
+
+
+          <!-- <label for="nf-email">Email</label>
+        <input type="email" id="nf-email" name="nf-email" class="form-control" placeholder="Enter Email.." autocomplete="email">
+        <span class="help-block">Please enter your email</span> -->
+
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+  <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+</div>

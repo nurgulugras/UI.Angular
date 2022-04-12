@@ -1,0 +1,36 @@
+<div class="card card-accent-primary">
+  <div class="card-header">
+    <div class="d-flex align-items-center">
+      <div class="title-icon">
+        <i [class]="_cardTitleIcon"></i>
+      </div>
+      <div><strong>Authtentication Settings</strong></div>
+      <div class="ml-auto">
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" popover="Window Minimize"
+          triggers="mouseenter:mouseleave" (click)="minimalizeCardBody(cardBody)"><i
+            class="cil-window-minimize"></i></button>
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" (click)="refresh()"><i
+            class="cil-reload"></i></button>
+        <button type="button" class="btn btn-smx btn-success" (click)="saveOrUpdateConfigs()"><i
+            class="fa fa-save fa-lg mr-1 ml-1"></i>&nbsp;Update</button>
+      </div>
+    </div>
+  </div>
+
+  <div #cardBody class="card-body">
+
+    <tabset>
+      <tab>
+        <ng-template tabHeading><i class="cil-cog"></i> Basic Authtentication</ng-template>
+        <esa-basic-auth-configurations [basicAuthConfig]="authsConfig.basicAuthConfig"></esa-basic-auth-configurations>
+      </tab>
+      <tab>
+        <ng-template tabHeading><i class="cil-cog"></i> LDAP Configuration</ng-template>
+        <esa-ldap-auth-configurations [ldapAuthConfig]="authsConfig.ldapAuthConfig"></esa-ldap-auth-configurations>
+      </tab>
+    </tabset>
+
+    <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+  </div>
+</div>

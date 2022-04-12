@@ -1,0 +1,21 @@
+<form #form [formGroup]="formGroup" id="ngForm" action="" method="post" enctype="multipart/form-data"
+  class="form-horizontal" (ngSubmit)="onSubmit()">
+
+  <div class="form-group row">
+    <label class="col-md-2 col-form-label" for="text-input">Password Pattern</label>
+    <div class="col-md-4">
+      <input type="text" name="text-input" class="form-control" placeholder="Enter Password Regex Pattern"
+        formControlName="passPattern" [class.is-valid]="formGroup.controls.passPattern.valid "
+        [class.is-invalid]="formGroup.controls.passPattern.invalid">
+    </div>
+    <label class="col-md-2 col-form-label" for="text-input">Description</label>
+    <div class="col-md-4">
+      <input type="text" name="text-input" class="form-control" placeholder="Enter Password Pattern Description"
+        formControlName="passPatternDesc" [class.is-valid]="formGroup.controls.passPatternDesc.valid "
+        [class.is-invalid]="formGroup.controls.passPatternDesc.invalid ">
+    </div>
+  </div>
+
+</form>
+
+<ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

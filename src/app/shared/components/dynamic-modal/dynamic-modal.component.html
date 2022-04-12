@@ -1,0 +1,17 @@
+<div class="modal-content">
+
+  <div class="modal-header" *ngIf="hasHeader">
+    <h4 class="modal-title pull-left">
+      <div [innerHtml]="title"></div>
+    </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="close()">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+
+  <div class="modal-body pt-1">
+    <div #componentContainer></div>
+
+  </div>
+
+</div>

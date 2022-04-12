@@ -1,0 +1,20 @@
+<div class="animated fadeIn" dynamicFixedFullHeight>
+  <div class="row" style="height: 100%;">
+
+    <div class="col">
+      <div class="flex-container">
+
+        <div class="flex-item" style="min-width: 320px; max-width: 320px;">
+          <esa-system-log-list-filter [(systemLogFilterParameter)]="systemLogFilterParameter"
+            (onSearchButtonClick)="logListComponent.getList()"></esa-system-log-list-filter>
+        </div>
+
+        <div class="flex-item" style="width: 100%;">
+          <esa-system-log-list #logListComponent [(systemLogFilterParameter)]="systemLogFilterParameter"></esa-system-log-list>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

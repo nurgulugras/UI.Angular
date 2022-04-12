@@ -1,0 +1,75 @@
+<div class="card card-accent-primary" style="height: 100%;">
+    <div class="card-header">
+        <div class="d-flex align-items-center">
+            <div> <strong>Volumes</strong> </div>
+            <div class="ml-auto">
+                <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" (click)="refresh()"><i
+            class="cil-reload"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <p-table [value]="volumes" styleClass="p-datatable-sm" [rowHover]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Volume</th>
+                    <th style="width: 32px;"></th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-volume>
+                <tr [ngClass]="{ 'clicked': selectedVolume == volume }">
+                    <td>{{volume}}</td>
+                    <td style="padding:0;">
+                        <button type="button" class="btn btn-primary btn-sm" popover="Details" triggers="mouseenter:mouseleave" (click)="selectedVolumeChanged(volume)"><i class="cil-zoom"></i></button>
+                    </td>
+                </tr>
+
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td colspan="2">
+                        Kayıt yok
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <!-- 
+
+    <table class="table table-bordered table-responsive-sm table-striped table-sm" *ngIf="volumes">
+      <thead>
+        <tr>
+          <th>Volume</th>
+          <th style="width: 6px;">
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let volumes of volumes; index as i">
+          <td>{{volumes}}</td>
+          <td>
+            <button type="button" class="btn btn-primary btn-sm" popover="Details" triggers="mouseenter:mouseleave"
+              (click)="selectedVolumeChanged(volumes)"><i class="cil-zoom"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table> -->
+        <!-- <nav>
+      <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+        <li class="page-item active">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">4</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+    </nav> -->
+
+    </div>
+
+    <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+</div>

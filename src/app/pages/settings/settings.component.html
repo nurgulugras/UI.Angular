@@ -1,0 +1,29 @@
+<div class="animated fadeIn">
+
+  <div class="row">
+    <div class="col-sm-4 col-md-3">
+
+      <div class="card card-accent-primary">
+        <div class="card-body">
+
+          <ul style="list-style-type: none">
+            <!-- <li><a routerLink="settings" routerLinkActive="active-link"> <i class="cil-settings"></i>
+                General Settings</a></li> -->
+            <li routerLinkActive="active-link"><a routerLink="notification"><i class="cil-bell"></i>
+                Notification Settings</a></li>
+            <li routerLinkActive="active-link"><a routerLink="auth"><i class="cil-warning"></i> Authentication
+                Settings</a></li>
+            <li routerLinkActive="active-link"><a routerLink="mail"><i class="cil-envelope-open"></i> Mail Settings</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-sm-8 col-md-9">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,17 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col">
+      <esa-node-list (onSelectedNodeChanged)="selectedNodeChanged($event)"></esa-node-list>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="selectedNode">
+    <div class="col-sm-4">
+      <esa-node-info [selectedNode]="selectedNode"></esa-node-info>
+      <esa-node-status [selectedNode]="selectedNode"></esa-node-status>
+    </div>
+    <div class="col-sm-8">
+      <esa-node-lun-list [selectedNode]="selectedNode"></esa-node-lun-list>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,72 @@
+<div class="card">
+    <div class="card-header">
+
+        <div class="d-flex align-items-center">
+
+            <div>Filtreleme</div>
+
+            <div class="ml-auto">
+                <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" popover="Window Minimize" triggers="mouseenter:mouseleave" (click)="minimalizeCardBody(cardBody)"><i
+        class="cil-window-minimize"></i></button>
+            </div>
+        </div>
+
+    </div>
+    <div #cardBody class="card-body">
+        <div>
+            <div class="row">
+                <div class="col">
+                    <p-dropdown id="volume-input" [style]="{'width':'100%'}" [options]="companies" [(ngModel)]="licenceFilterCriteriaParametters.companyId" optionLabel="name" optionValue="id" autoWidth="false" [showClear]="true" placeholder="Şirket Seçimi"></p-dropdown>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col">
+                    <p-dropdown id="volume-input" [style]="{'width':'100%'}" [options]="applications" [(ngModel)]="licenceFilterCriteriaParametters.appId" optionLabel="name" optionValue="id" autoWidth="false" [showClear]="true" [showClear]="true" placeholder="Uygulama Seçimi"></p-dropdown>
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col">
+                    <input type="input" [style]="{'width':'100%'}" class="text-input fixFormItem" placeholder="Lisans No" [(ngModel)]="licenceFilterCriteriaParametters.licenseNumber">
+                </div>
+            </div>
+            <div class="row pt-2">
+                <div class="col">
+                    <input type="checkbox" id="inline-checkbox1" [(ngModel)]="licenceFilterCriteriaParametters.isOnlyActives"> Aktif Lisanslar
+
+                </div>
+            </div>
+
+
+            <div class="row mt-2">
+                <div class="col" style="width: 100%;">
+                    <button type="submit" class="btn btn-primary px-4 float-right" [style]="{'width':'100%'}" (click)="onSubmitButton()"> <i class="cil-search"></i>&nbsp;Listele</button>
+                </div>
+            </div>
+            <!-- <div class="row">
+                  <div class="col" style="width: 100%;">
+                      <p-multiSelect [(ngModel)]="" optionValue="id" autoWidth="false" [style]="{'width':'100%'}" placeholder="Select User(s)" styleClass="p-inputtext-sm">
+                      </p-multiSelect>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col" style="width: 100%;">
+                      <p-multiSelect [(ngModel)]="" optionValue="id" autoWidth="false" [style]="{'width':'100%'}" placeholder="Select User(s)" styleClass="p-inputtext-sm">
+                      </p-multiSelect>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col" style="width: 100%;">
+                      <p-multiSelect [(ngModel)]="" optionValue="id" autoWidth="false" [style]="{'width':'100%'}" placeholder="Select User(s)" styleClass="p-inputtext-sm">
+                      </p-multiSelect>
+                  </div>
+              </div>
+  
+              <div class="row mt-2">
+                  <div class="col" style="width: 100%;">
+                      <button type="submit" class="btn btn-primary px-4 float-right" [style]="{'width':'100%'}" (click)="onSubmitButton()"> <i class="cil-search"></i>&nbsp;Search</button>
+                  </div>
+              </div> -->
+
+        </div>
+    </div>
+</div>

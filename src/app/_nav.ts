@@ -1,0 +1,326 @@
+import { INavData } from '@coreui/angular';
+
+export const menuItems: INavData[] = [
+  {
+    name: 'Dashboard',
+    url: '/dashboard',
+    icon: 'icon-speedometer'
+    // badge: {
+    //   variant: 'info',
+    //   text: 'NEW'
+    // }
+  },
+  {
+    name: 'Tanımlama',
+    title:true
+  },
+  {
+    name: 'Uygulamalar',
+    url: '/applications',
+    icon: 'cil-applications'
+  },
+  {
+    name: 'Şirketler',
+    url: '/organizations',
+    icon: 'cil-lan'
+  },
+  {
+    name: 'Kullanıcılar',
+    url: '/users',
+    icon: 'cil-user'
+  },
+  {
+    name: 'Lisans',
+    title:true
+  },
+  {
+    name: 'Lisans Yönetimi',
+    url: '/licences',
+    icon: 'cil-layers'
+  },
+  {
+    name: 'Sistem',
+    title:true
+  },
+  // {
+  //   name: 'Ayarlar',
+  //   url: '/nodes',
+  //   icon: 'cil-storage',
+  // },
+  {
+    name: 'Hakkında',
+    url: '/about',
+    icon: 'cil-storage',
+  },
+  {
+    name: '---',
+    title:true
+  },
+
+  {
+    name: 'Nodes',
+    url: '/nodes',
+    icon: 'cil-storage',
+  },
+
+  {
+    name: 'Volumes',
+    url: '/volumes',
+    icon: 'icon-layers'
+  },
+  {
+    name: 'Shares',
+    url: '/shares',
+    icon: 'cil-folder-open'
+  },
+  {
+    name: 'Users',
+    url: '/users',
+    icon: 'cil-user'
+  },
+  {
+    name: 'Settings',
+    url: '/settings',
+    icon: 'cil-settings'
+  },
+  {
+    name: 'Jobs',
+    url: '/jobs',
+    icon: 'cil-loop'
+  },
+  // {
+  //   name: 'Event Logs',
+  //   url: '/event-logs',
+  //   icon: 'cil-spreadsheet'
+  // },
+  {
+    name: 'System Logs',
+    url: '/system-logs',
+    icon: 'cil-spreadsheet'
+  },
+  {
+    name: 'Audit Logs',
+    url: '/audit-logs',
+    icon: 'cil-spreadsheet'
+  },
+  // {
+  //   name: 'Base',
+  //   url: '/base',
+  //   icon: 'icon-puzzle',
+  //   children: [
+  //     {
+  //       name: 'Cards',
+  //       url: '/base/cards',
+  //       icon: 'icon-puzzle'
+  //     },
+  //     {
+  //       name: 'Carousels',
+  //       url: '/base/carousels',
+  //       icon: 'icon-puzzle'
+  //     },
+  //     {
+  //       name: 'Collapses',
+  //       url: '/base/collapses',
+  //       icon: 'icon-puzzle'
+  //     },
+  //     {
+  //       name: 'Forms',
+  //       url: '/base/forms',
+  //       icon: 'icon-puzzle'
+  //     },
+  //     {
+  //       name: 'Navbars',
+  //       url: '/base/navbars',
+  //       icon: 'icon-puzzle'
+
+  //     },
+  //     {
+  //       name: 'Pagination',
+  //       url: '/base/paginations',
+  //       icon: 'icon-puzzle'
+  //     },
+  //     {
+  //       name: 'Popovers',
+  //       url: '/base/popovers',
+  //       icon: 'icon-puzzle'
+  //     },
+  //     {
+  //       name: 'Progress',
+  //       url: '/base/progress',
+  //       icon: 'icon-puzzle'
+  //     },
+  //     {
+  //       name: 'Switches',
+  //       url: '/base/switches',
+  //       icon: 'icon-puzzle'
+  //     },
+  //     {
+  //       name: 'Tables',
+  //       url: '/base/tables',
+  //       icon: 'icon-puzzle'
+  //     },
+  //     {
+  //       name: 'Tabs',
+  //       url: '/base/tabs',
+  //       icon: 'icon-puzzle'
+  //     },
+  //     {
+  //       name: 'Tooltips',
+  //       url: '/base/tooltips',
+  //       icon: 'icon-puzzle'
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Buttons',
+  //   url: '/buttons',
+  //   icon: 'icon-cursor',
+  //   children: [
+  //     {
+  //       name: 'Buttons',
+  //       url: '/buttons/buttons',
+  //       icon: 'icon-cursor'
+  //     },
+  //     {
+  //       name: 'Dropdowns',
+  //       url: '/buttons/dropdowns',
+  //       icon: 'icon-cursor'
+  //     },
+  //     {
+  //       name: 'Brand Buttons',
+  //       url: '/buttons/brand-buttons',
+  //       icon: 'icon-cursor'
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Charts',
+  //   url: '/charts',
+  //   icon: 'icon-pie-chart'
+  // },
+  // {
+  //   name: 'Icons',
+  //   url: '/icons',
+  //   icon: 'icon-star',
+  //   children: [
+  //     {
+  //       name: 'CoreUI Icons',
+  //       url: '/icons/coreui-icons',
+  //       icon: 'icon-star',
+  //       badge: {
+  //         variant: 'success',
+  //         text: 'NEW'
+  //       }
+  //     },
+  //     {
+  //       name: 'Flags',
+  //       url: '/icons/flags',
+  //       icon: 'icon-star'
+  //     },
+  //     {
+  //       name: 'Font Awesome',
+  //       url: '/icons/font-awesome',
+  //       icon: 'icon-star',
+  //       badge: {
+  //         variant: 'secondary',
+  //         text: '4.7'
+  //       }
+  //     },
+  //     {
+  //       name: 'Simple Line Icons',
+  //       url: '/icons/simple-line-icons',
+  //       icon: 'icon-star'
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Notifications',
+  //   url: '/notifications',
+  //   icon: 'icon-bell',
+  //   children: [
+  //     {
+  //       name: 'Alerts',
+  //       url: '/notifications/alerts',
+  //       icon: 'icon-bell'
+  //     },
+  //     {
+  //       name: 'Badges',
+  //       url: '/notifications/badges',
+  //       icon: 'icon-bell'
+  //     },
+  //     {
+  //       name: 'Modals',
+  //       url: '/notifications/modals',
+  //       icon: 'icon-bell'
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Widgets',
+  //   url: '/widgets',
+  //   icon: 'icon-calculator',
+  //   badge: {
+  //     variant: 'info',
+  //     text: 'NEW'
+  //   }
+  // },
+  // {
+  //   divider: true
+  // },
+  // {
+  //   title: true,
+  //   name: 'Extras',
+  // },
+  // {
+  //   name: 'Pages',
+  //   url: '/pages',
+  //   icon: 'icon-star',
+  //   children: [
+  //     {
+  //       name: 'Login',
+  //       url: '/login',
+  //       icon: 'icon-star'
+  //     },
+  //     {
+  //       name: 'Register',
+  //       url: '/register',
+  //       icon: 'icon-star'
+  //     },
+  //     {
+  //       name: 'Error 404',
+  //       url: '/404',
+  //       icon: 'icon-star'
+  //     },
+  //     {
+  //       name: 'Error 500',
+  //       url: '/500',
+  //       icon: 'icon-star'
+  //     }
+  //   ]
+  // },
+  // {
+  //   name: 'Disabled',
+  //   url: '/dashboard',
+  //   icon: 'icon-ban',
+  //   badge: {
+  //     variant: 'secondary',
+  //     text: 'NEW'
+  //   },
+  //   attributes: { disabled: true },
+  // },
+  // {
+  //   name: 'Download CoreUI',
+  //   url: 'http://coreui.io/angular/',
+  //   icon: 'icon-cloud-download',
+  //   class: 'mt-auto',
+  //   variant: 'success',
+  //   attributes: { target: '_blank', rel: 'noopener' }
+  // },
+  // {
+  //   name: 'Try CoreUI PRO',
+  //   url: 'http://coreui.io/pro/angular/',
+  //   icon: 'icon-layers',
+  //   variant: 'danger',
+  //   attributes: { target: '_blank', rel: 'noopener' }
+  // }
+];

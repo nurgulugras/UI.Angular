@@ -1,0 +1,90 @@
+<div class="card card-accent-primary">
+  <div class="card-header padding-stabilization">
+    <div class="d-flex align-items-center">
+      <div class="title-icon">
+        <i [class]="_cardTitleIcon"></i>
+      </div>
+      <div><strong>Logs</strong></div>
+      <div class="ml-auto">
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" popover="Download Excel"
+          triggers="mouseenter:mouseleave" (click)="exportToExcel()"><i class="cil-data-transfer-down"></i></button>
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" popover="Refresh"
+          triggers="mouseenter:mouseleave" (click)="refresh()"><i class="cil-reload"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <p-table [value]="auditLogs" styleClass="p-datatable-sm" sortMode="multiple" [rowHover]="true" [paginator]="true"
+      [multiSortMeta]="[{field: 'createDate', order: -1}]" [showCurrentPageReport]="true" [lazy]="true"
+      (onLazyLoad)="loadLogs($event)" [paginator]="true" [totalRecords]="totalRecords" [rows]="rows"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [rowsPerPageOptions]="tableRowsPers">
+      <ng-template pTemplate="header">
+        <tr>
+
+          <th pSortableColumn="logDate" style="width:140px;">Log Date </th>
+          <th pSortableColumn="username">Username</th>
+          <th pSortableColumn="share">Share</th>
+          <th pSortableColumn="operation">Operation</th>
+          <!-- <th pSortableColumn="ip" style="width: 140px;">IP</th> -->
+          <!-- <th pSortableColumn="machine" style="width: 140px;">Machine</th> -->
+          <th pSortableColumn="fileName">File Name</th>
+          <th pSortableColumn="fileExtension">Extension</th>
+          <th pSortableColumn="dir">Directory</th>
+
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-auditLog>
+        <tr [style.background-color]="getSeverityBackgroundColor(auditLog.severity)">
+
+          <td>{{dateFormat(auditLog.logDate)}}</td>
+          <td>{{auditLog.username}}</td>
+          <td>{{auditLog.share}}</td>
+          <td>{{auditLog.operation}}</td>
+          <!-- <td>{{auditLog.ip}}</td> -->
+          <!-- <td>{{auditLog.machine}}</td> -->
+          <td>{{auditLog.fileName}}</td>
+          <td>{{auditLog.fileExtension}}</td>
+          <td>{{auditLog.dir}}</td>
+
+          <!-- <td>
+            <div [innerHTML]="auditLog.changes | replaceLineBreaks"></div>
+          </td> -->
+        </tr>
+
+      </ng-template>
+
+    </p-table>
+
+  </div>
+
+  <ngx-loading [show]=" _isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+</div>
+
+
+<div bsModal #changesDetailPanel="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  aria-labelledby="volumeConfigLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Changes</h4>
+      </div>
+      <div class="modal-body">
+
+        <br>
+        <div [innerHTML]="changes | replaceLineBreaks"></div>
+        <br>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="changesDetailPanel.hide()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+</div>

@@ -1,0 +1,46 @@
+<div class="card card-accent-primary" style="height: 100%;">
+    <div class="card-header">
+        <div class="d-flex align-items-center">
+            <div> <strong>Organizasyonlar</strong> </div>
+            <div class="ml-auto">
+                <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" (click)="refresh()"><i
+            class="cil-reload" popover="Yenile" triggers="mouseenter:mouseleave"></i></button>
+                <button type="button" class="btn btn-smx btn-ghost-secondary text-danger" (click)="addNewOrganization()" popover="Yeni Uygulama Ekle" triggers="mouseenter:mouseleave"><i class="cil-plus"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <p-table [value]="organizations" styleClass="p-datatable-sm" [rowHover]="true">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Organizasyon</th>
+                    <th style="width: 54px;"></th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-organization>
+                <tr [ngClass]="{ 'clicked': selectedOrganization.id == organization.id }">
+                    <td>{{organization.name}}</td>
+                    <td style="padding:0;">
+                        <button type="button" class="btn btn-success btn-sm" popover="Details" triggers="mouseenter:mouseleave" (click)="openOrganizationEditComponent(organization)"><i class="cil-pencil"></i></button>
+                        <button type="button" class="btn btn-primary btn-sm" popover="Details" triggers="mouseenter:mouseleave" (click)="selectedOrganizationChanged(organization)"><i class="cil-zoom"></i></button>
+                    </td>
+
+                </tr>
+
+            </ng-template>
+            <ng-template pTemplate="emptymessage" let-columns>
+                <tr>
+                    <td colspan="2">
+                        Kayıt yok
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
+
+    <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+</div>

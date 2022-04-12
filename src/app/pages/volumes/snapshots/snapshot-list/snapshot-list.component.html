@@ -1,0 +1,75 @@
+<div class="card">
+  <div class="card-header">
+    <div class="d-flex align-items-center">
+      <div class="node-title-icon"><i [class]="_cardVolumeChildTitleIcon"></i></div>
+      <div> Volume Snapshots </div>
+      <div class="ml-auto">
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" popover="Download Excel"
+          triggers="mouseenter:mouseleave" (click)="exportToExcel()"><i class="cil-data-transfer-down"></i></button>
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" (click)="refresh()"
+          popover="Refresh List" triggers="mouseenter:mouseleave"><i class="cil-reload"></i></button>
+        <button type="button" class="btn btn-smx btn-ghost-danger" popover="Delete All Snapshots"
+          triggers="mouseenter:mouseleave" (click)="deleteAllSnapshotsOfVolume()"><i class="cil-trash"></i></button>
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-danger" popover="Create Snapshot"
+          triggers="mouseenter:mouseleave"><i class="cil-plus" (click)="createSnapshot()"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <div *ngIf="!isLoadedEntities; else tableTemplate" (click)="loadEntities()"
+      class="d-flex justify-content-center align-items-center text-primary link" style="padding: 30px;"><i
+        class="cil-reload"></i> &nbsp;Load snapshots</div>
+
+    <ng-template #tableTemplate>
+
+      <p-table [value]="snapshots" styleClass="p-datatable-sm" [rowHover]="true" [paginator]="true"
+        [resizableColumns]="true" [autoLayout]="true" [showCurrentPageReport]="true" [rows]="5"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [rowsPerPageOptions]="[5,15,50]">
+        <!-- [lazy]="true" [loading]="loading" (onLazyLoad)="loadCustomers($event)" [paginator]="true" [totalRecords]="totalRecords" [rows]="rows" -->
+
+        <ng-template pTemplate="header">
+          <tr>
+            <th pSortableColumn="createDate" style="width: 140px;">Create Date</th>
+            <th pSortableColumn="name">Name</th>
+            <th>Description</th>
+            <th pSortableColumn="useForVersion" style="width: 120px;">Use For Version</th>
+            <th pSortableColumn="isSchedule" style="width: 100px;">Is Schedule</th>
+            <th style="width: 50px;"></th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-snapshot>
+          <tr>
+            <td>{{dateFormat(snapshot.createDate)}}</td>
+            <td>{{snapshot.name}}</td>
+            <td>{{snapshot.description}}</td>
+            <td style="padding: 0; text-align: center;">
+              <button type="button" class="btn btn-success btn-pill btn-sm ml-1" *ngIf="isUseForVersion(snapshot)"><i
+                  class="fa fa-check"></i></button>
+              <span *ngIf="!isUseForVersion(snapshot)"> - </span>
+            </td>
+            <td style="padding: 0; text-align: center;">
+              <button type="button" class="btn btn-success btn-pill btn-sm ml-1" *ngIf="snapshot.isSchedule"><i
+                  class="fa fa-check"></i></button>
+              <span *ngIf="!snapshot.isSchedule"> - </span>
+            </td>
+            <td style="padding: 0;">
+              <button type="button" class="btn btn-primary btn-sm"
+                [popover]="isImmutableVolume() ? 'The Snapshot cannot be restored while volume is immutable' : 'Restore This Snapshot'"
+                [disabled]="isImmutableVolume()" triggers="mouseenter:mouseleave" (click)="restoreSnapshot(snapshot)"><i
+                  class="cil-history"></i></button>
+              <button type="button" class="btn btn-danger btn-sm ml-1" popover="Delete This Snapshot"
+                triggers="mouseenter:mouseleave" (click)="deleteSnapshot(snapshot)"><i class="cil-trash"></i></button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+
+    </ng-template>
+
+  </div>
+</div>
+
+<ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

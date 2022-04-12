@@ -1,0 +1,71 @@
+<div class="card card-accent-primary">
+  <div class="card-header">
+    <div class="d-flex align-items-center">
+      <div class="title-icon">
+        <i [class]="_cardTitleIcon"></i>
+      </div>
+      <div><strong>Active Job List</strong></div>
+      <div class="ml-auto">
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" popover="Window Minimize"
+          triggers="mouseenter:mouseleave" (click)="minimalizeCardBody(cardBody)"><i
+            class="cil-window-minimize"></i></button>
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" popover="Refresh"
+          triggers="mouseenter:mouseleave" (click)="refresh()"><i class="cil-reload"></i></button>
+      </div>
+    </div>
+  </div>
+  <div #cardBody class="card-body">
+
+    <p-table [columns]="cols" [value]="jobs" styleClass="p-datatable-sm" sortMode="multiple" [rowHover]="true"
+      [resizableColumns]="true" [autoLayout]="true">
+
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <ng-container *ngFor="let col of columns">
+            <th [pSortableColumn]="col.field" [style.width]="col.width ? col.width : ''">
+              {{col.header}}
+            </th>
+          </ng-container>
+          <th style="width: 36px;">
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+          <ng-container *ngFor="let col of columns">
+            <td>
+              <span *ngIf="col.type && col.type == 'datetime'; else next1">
+                {{dateFormat(rowData[col.field])}}
+              </span>
+              <ng-template #next1>
+                <span *ngIf="col.field == 'status'; else next2">
+                  <span class="badge"
+                    [ngClass]="rowData.status == jobStatusUI.Running ? 'badge-success' : 'badge-warning'">{{rowData[col.field]}}</span>
+                </span>
+              </ng-template>
+              <ng-template #next2>
+                <span>
+                  {{rowData[col.field]}}
+                </span>
+              </ng-template>
+            </td>
+          </ng-container>
+
+          <td style="padding: 0; text-align: center;">
+            <button type="button" class="btn btn-danger btn-sm" popover="Pause Job" triggers="mouseenter:mouseleave"
+              *ngIf="rowData.status == jobStatusUI.Running" (click)="pauseJob(rowData.id)"><i
+                class="fa fa-pause-circle-o fa-lg"></i></button>
+            <button type="button" class="btn btn-success btn-sm" popover="Resume Job" triggers="mouseenter:mouseleave"
+              *ngIf="rowData.status == jobStatusUI.Paused" (click)="resumeJob(rowData.id)"><i
+                class="fa fa-play-circle fa-lg"></i></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+
+  <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+</div>

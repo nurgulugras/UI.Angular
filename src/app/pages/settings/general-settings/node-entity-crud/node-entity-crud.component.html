@@ -1,0 +1,77 @@
+<div class="card card-accent-primary" style="width: 600px;">
+  <div class="card-header">
+    Base Node Settings
+    <div class="card-header-actions">
+
+      <button type="button" class="card-header-action btn btn-lg btn-cil-reload text-primary" (click)="onRefreshButtonClick()" popover="Refresh Base Node" triggers="mouseenter:mouseleave"><i
+          class="cil-reload"></i></button>
+
+      <button type="button" class="card-header-action btn btn-lg btn-cil-reload text-danger" (click)="onDeleteButtonClick()" popover="Delete Base Node" triggers="mouseenter:mouseleave"><i
+          class="cil-trash"></i></button>
+
+      <button type="button" class="card-header-action btn btn-lg btn-cil-save text-success" (click)="onSubmit()" [disabled]="!formGroup.valid" popover="{{isEditMode() ? 'Update' : 'Save'}} Base Node" triggers="mouseenter:mouseleave"><i
+        class="cil-save"></i></button>
+
+      <!-- <button type="button" class="btn btn-pill btn-sm btn-success" (click)="onSubmit()" [disabled]="!formGroup.valid"><i
+          class="fa fa-save fa-lg mr-1 ml-1"></i>{{isEditMode() ? 'Update' : 'Save'}}</button> -->
+    </div>
+  </div>
+  <div class="card-body">
+
+    <form #form [formGroup]="formGroup" id="ngForm" action="" method="post" enctype="multipart/form-data"
+      class="form-horizontal" (ngSubmit)="onSubmit()">
+
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Host Name</label>
+        <div class="col-md-4">
+          <input type="text" name="text-input" class="form-control" placeholder="Enter Host Name"
+            formControlName="hostName" [class.is-valid]="formGroup.controls.hostName.valid"
+            [class.is-invalid]="formGroup.controls.hostName.invalid">
+        </div>
+
+        <label class="col-md-2 col-form-label" for="text-input">Host IP</label>
+        <div class="col-md-4">
+          <input type="text" name="text-input" class="form-control" placeholder="Enter IP Number" formControlName="ip"
+            [class.is-valid]="formGroup.controls.ip.valid" [class.is-invalid]="formGroup.controls.ip.invalid">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Username</label>
+        <div class="col-md-4">
+          <input type="text" name="text-input" class="form-control" placeholder="Enter Username"
+            formControlName="username" [class.is-valid]="formGroup.controls.username.valid"
+            [class.is-invalid]="formGroup.controls.username.invalid">
+        </div>
+        <label class="col-md-2 col-form-label" for="text-input">Password</label>
+        <div class="col-md-4">
+          <input type="password" name="text-input" class="form-control" placeholder="Enter Password"
+            formControlName="password" [class.is-valid]="formGroup.controls.password.valid"
+            [class.is-invalid]="formGroup.controls.password.invalid" password>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Is Active</label>
+        <div class="col-md-4">
+          <label class="switch switch-label switch-pill switch-outline-success-alt">
+            <input type="checkbox" class="switch-input" checked formControlName="isActive">
+            <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- <div class="form-group row">
+        <div class="col">
+          <button type="submit" [disabled]="!formGroup.valid" class="btn btn-primary px-4 float-right">{{isEditMode() ?
+            'Update' : 'Save'}}</button>
+        </div>
+      </div> -->
+
+    </form>
+
+
+    <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+  </div>
+</div>

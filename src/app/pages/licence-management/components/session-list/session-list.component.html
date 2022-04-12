@@ -1,0 +1,45 @@
+<div class="card">
+    <div class="card-header">
+        <div class="d-flex align-items-center">
+            <div class="node-title-icon"><i [class]="_cardVolumeChildTitleIcon"></i></div>
+            <div> Oturum Listesi </div>
+            <div class="ml-auto">
+                <button type="button" class="btn btn-smx btn-danger"><i class="cil-trash" (click)="delete()"></i> Tüm Oturumları Sonlandır</button>
+                <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" popover="Download Excel" triggers="mouseenter:mouseleave" (click)="exportToExcel()"><i class="cil-data-transfer-down"></i></button>
+                <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" (click)="refresh()" popover="Refresh List" triggers="mouseenter:mouseleave"><i class="cil-reload"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <p-table [value]="sessions" styleClass="p-datatable-sm" [rowHover]="true" [paginator]="true" [resizableColumns]="true" [autoLayout]="true" [showCurrentPageReport]="true" [rows]="5" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [rowsPerPageOptions]="[5,15,50]">
+            <!-- [lazy]="true" [loading]="loading" (onLazyLoad)="loadCustomers($event)" [paginator]="true" [totalRecords]="totalRecords" [rows]="rows" -->
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="name">Oturum Id</th>
+                    <th pSortableColumn="createDate" style="width: 140px;">Oluşturma Tarihi</th>
+                    <th>Kullanıcı Adı</th>
+                    <th pSortableColumn="isActive" style="width: 100px;">Son Aktivite Tarihi</th>
+                    <th style="width: 30px;"></th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-session>
+                <tr>
+                    <td>{{session.sessionUId}}</td>
+                    <td>{{dateFormat(session.createDate)}}</td>
+                    <td>{{session.userName}}</td>
+                    <td>{{dateFormat(session.lastActivityDate)}}</td>
+                    <td style="padding: 0;">
+
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
+</div>
+
+<ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

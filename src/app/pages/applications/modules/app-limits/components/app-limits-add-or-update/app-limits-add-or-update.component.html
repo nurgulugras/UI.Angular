@@ -1,0 +1,66 @@
+<div class="card mt-4">
+    <!-- <div class="card-header">
+    <i class="cil-add"></i>Ürün ....
+  </div> -->
+
+    <div class="card-body">
+
+        <form #form [formGroup]="formGroup" id="ngForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+
+            <div class="form-group row" *ngIf="isEditMode()">
+                <label class="col-md-3 col-form-label" for="id-input">Id</label>
+                <div class="col-md-9">
+                    <input type="text" name="id-input" class="form-control" placeholder="Id" [attr.disabled]="true" formControlName="id">
+                </div>
+            </div>
+
+            <div class="form-group row" *ngIf="isEditMode()">
+                <label class="col-md-3 col-form-label" for="text-input">Oluşturma Tarihi</label>
+                <div class="col-md-9">
+                    <input type="text" name="text-input" class="form-control" placeholder="Oluşturma Tarihi" [attr.disabled]="true" formControlName="createDate">
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="isEditMode()">
+                <label class="col-md-3 col-form-label" for="text-input">Oluşturan Kişi</label>
+                <div class="col-md-9">
+                    <input type="text" name="text-input" class="form-control" placeholder="Oluşturan Kişi" [attr.disabled]="true" formControlName="createUserName">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="limit-input">Limit Adı</label>
+                <div class="col-md-9">
+                    <input type="text" name="limit-input" class="form-control" placeholder="Limit" formControlName="limitName" [class.is-valid]="formGroup.controls.limitName.valid" [class.is-invalid]="formGroup.controls.limitName.invalid">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="description-input">Açıklama</label>
+                <div class="col-md-9">
+                    <input type="text" name="description-input" class="form-control" placeholder="Açıklama" formControlName="description">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label" for="description-input">Aktif Mi?</label>
+                <div class="col-md-9">
+                    <label class="switch switch-label switch-pill switch-outline-success-alt">
+            <input type="checkbox" class="switch-input" checked formControlName="isActive" id="form-isActive">
+            <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+          </label>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="card-footer" style="display: flex; justify-content: flex-end;">
+        <!-- <button type="reset" class="btn btn-danger" (click)="cancelForm()"><i class="fa fa-ban"></i> Cancel</button> -->
+        <button [disabled]="!formGroup.valid" class="btn btn-primary ml-2" (click)="saveOrUpdateAppLimit()"><i
+        class="cil-save"></i> {{isEditMode() ? 'Güncelle' : 'Kaydet'}}</button>
+    </div>
+</div>
+
+<ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

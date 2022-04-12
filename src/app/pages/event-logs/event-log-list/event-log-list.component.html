@@ -1,0 +1,100 @@
+<div class="card card-accent-primary" style="height: 100%;">
+  <div class="card-header">
+    <strong>Event Log List</strong>
+
+    <div class="card-header-actions">
+      <button type="button" class="card-header-action btn btn-lg btn-cil-reload text-primary" (click)="refresh()"><i
+          class="cil-reload"></i></button>
+    </div>
+
+  </div>
+  <div class="card-body">
+
+    <div>
+
+      <!-- <div (collapsed)="collapsed($event)" (expanded)="expanded($event)" [collapse]="isCollapsed"> -->
+        <div class="row">
+          <div class="col text-center text-muted">
+            Filter Panel
+          </div>
+        </div>
+        <div class="row">
+          <div class="col" style="width: 100%;">
+            <p-multiSelect [options]="types" [(ngModel)]="selectedTypes" optionLabel="" autoWidth="false"
+              [style]="{'width':'100%'}" placeholder="Select Type(s)" styleClass="p-inputtext-sm"></p-multiSelect>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col" style="width: 100%;">
+            <p-multiSelect [options]="levels" [(ngModel)]="selectedLevels" optionLabel="" autoWidth="false"
+              [style]="{'width':'100%'}" placeholder="Select Level(s)" styleClass="p-inputtext-sm"></p-multiSelect>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col" style="width: 100%;">
+            <p-calendar selectionMode="range" [style]="{'width':'100%'}"
+              placeholder="Select date range"></p-calendar>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col" style="width: 100%;">
+            <button type="submit" class="btn btn-primary px-4 float-right" [style]="{'width':'100%'}" (click)="showList = true"> <i
+                class="cil-search"></i>&nbsp;Search</button>
+          </div>
+        </div>
+      <!-- </div> -->
+     
+
+    </div>
+
+    <p-table [columns]="cols" [value]="eventLogs" styleClass="p-datatable-sm mt-3" sortMode="multiple" [rowHover]="true"
+      [resizableColumns]="true" [autoLayout]="true">
+
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <ng-container *ngFor="let col of columns">
+            <th [pSortableColumn]="col.field" [style.width]="col.width ? col.width : ''">
+              {{col.header}}
+            </th>
+          </ng-container>
+          <!-- <th style="width: 36px;">
+            #
+          </th> -->
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr class="link" (click)="openDetail(rowData)"  *ngIf="showList">
+          <ng-container *ngFor="let col of columns">
+            <td>
+              <span *ngIf="col.type && col.type == 'datetime'; else next1">
+                {{dateFormat(rowData[col.field])}}
+              </span>
+              <ng-template #next1>
+                <span *ngIf="col.field == 'level'; else next2">
+
+                  <span class="link badge" [ngClass]="getBadgeClassByLevel(rowData.level)">{{rowData[col.field]}}</span>
+
+                </span>
+              </ng-template>
+              <ng-template #next2>
+                <span>
+                  {{rowData[col.field]}}
+                </span>
+              </ng-template>
+            </td>
+          </ng-container>
+
+          <!-- <td style="padding: 0; text-align: center;">
+            <button type="button" class="btn btn-sm" popover="Details" triggers="mouseenter:mouseleave"
+              (click)="openDetail(rowData)"><i class="cil-search"></i></button>
+          </td> -->
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+
+  <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+</div>

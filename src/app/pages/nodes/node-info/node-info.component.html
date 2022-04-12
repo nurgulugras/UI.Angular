@@ -1,0 +1,26 @@
+<div class="card card-accent-primary">
+  <div class="card-header">
+    <div class="d-flex align-items-center">
+      <div class="node-title-icon"><i class="cil-apps-settings"></i></div>
+      <div>Node Info <strong>{{getCardTitle()}}</strong> </div>
+      <div class="ml-auto">
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" style="padding: 2px;"
+          (click)="refresh()"><i class="cil-reload"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <p-table [value]="nodeInfos" styleClass="p-datatable-sm" [rowHover]="true" [resizableColumns]="true"
+      [autoLayout]="true">
+      <ng-template pTemplate="body" let-nodeInfo>
+        <tr>
+          <td>{{nodeInfo.key}}</td>
+          <td>{{nodeInfo.value}}</td>
+        </tr>
+      </ng-template>
+    </p-table>
+
+  </div>
+  <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+</div>

@@ -1,0 +1,9 @@
+:host {
+     ::ng-deep .p-disabled {
+        background-color: #e4e7ea;
+        opacity: 1;
+    }
+    .invalid-component {
+        background-color: #fcc9c9;
+    }
+}

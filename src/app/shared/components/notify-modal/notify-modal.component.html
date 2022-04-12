@@ -1,0 +1,21 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">
+      <div [innerHtml]="title"></div>
+    </h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="close(null)">
+      <span aria-hidden="true">×</span>
+    </button>
+  </div>
+  <div class="modal-body pt-3 pb-3">
+    <div [innerHtml]="content"></div>
+  </div>
+
+  <div class="modal-footer" *ngIf="buttons && buttons.length > 0">
+    <button *ngFor="let button of buttons" type="button"
+      class="btn {{button.backgroundClass ? button.backgroundClass : 'btn-primary'}}" (click)="close(button)">
+      <i *ngIf="button.icon" class="{{button.icon}}"></i>
+      &nbsp; {{button.text}}
+    </button>
+
+  </div>

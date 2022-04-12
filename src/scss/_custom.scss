@@ -1,0 +1,206 @@
+// Here you can add other styles
+@import 'variables';
+:root {
+    font-size: $baseFontSize;
+}
+
+body {
+    font-size: 1rem;
+}
+
+.full-height-container {
+    height: 100% !important;
+}
+
+.link {
+    cursor: pointer;
+}
+
+.required {
+    border: 1px solid #f86c6b !important;
+}
+
+.company-color {
+    color: #E71D2E;
+}
+
+.text-danger {
+    color: red !important;
+}
+
+.text-bold {
+    font-weight: bold !important;
+}
+
+.card {
+    // overflow:hidden !important;
+    .card-body {
+        // overflow: auto !important;
+        &.hidden-body {
+            display: none !important;
+        }
+    }
+    .card-header {
+        .title-icon {
+            padding-top: 5px;
+            padding-right: 4px;
+            font-size: 22px;
+            opacity: 0.6;
+            color: #20a8d8 !important;
+        }
+        .node-title-icon {
+            color: gray;
+            padding-top: 4px;
+            padding-right: 4px;
+        }
+        &.padding-stabilization {
+            padding-top: 7px;
+            padding-bottom: 6px;
+        }
+    }
+    .card-header-tool {
+        display: flex;
+    }
+}
+
+.invisible {
+    visibility: hidden !important;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.popover {
+    z-index: 99999999 !important;
+}
+
+.text-align-center {
+    text-align: center !important;
+}
+
+.noclick {
+    cursor: default;
+    pointer-events: none;
+    display: inline-block;
+}
+
+.switch-pill {
+    // padding-top: 5px !important;
+    // height: 100% !important;
+    margin-bottom: 0 !important;
+}
+
+.nav-link {
+    &.active {
+        font-weight: bold;
+    }
+}
+
+.p-datatable-sm {
+    font-size: 1rem !important;
+}
+
+//  .p-timepicker{
+// .p-minute-picker{
+//     cursor: default;
+//     pointer-events: none;
+//     display: inline-block;
+// }
+//  }
+.dropdown-menu {
+    font-size: 1rem;
+}
+
+.p-drowdown-style {
+    height: 34px !important;
+    font-size: 1rem;
+}
+
+.dropdown-input-style {
+    height: 28.81px !important;
+    span {
+        font-size: 0.875rem;
+        padding: 0.3rem 0.8rem;
+    }
+}
+
+app-sidebar-nav-link-content {
+    font-size: 1.1rem;
+}
+
+.main-node-dropDown {
+    border-radius: 4px !important;
+    background-color: #ffffff !important;
+    padding: 2px !important;
+    font-weight: bold !important;
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+}
+
+.main-node-dropDown2 {
+    border-radius: 4px !important;
+    background-color: #ffffff !important;
+    padding: 2px !important;
+}
+
+.node-navbar {
+    display: flex;
+    height: 38px;
+    .host-container {
+        margin-right: 8px;
+        display: flex !important;
+        // background-color:  #e8f5ff;
+        // padding: 2px;
+        cursor: pointer;
+        // border: 1px solid;
+        // border-radius: 6px;
+        .status-img {
+            padding: 7px;
+        }
+        .host-name {
+            width: auto;
+            padding-top: 8px;
+            padding-right: 12px;
+        }
+        &:hover {
+            background-color: #dbf0ff;
+        }
+    }
+}
+
+.btn {
+    &.btn-smx {
+        padding: 0.4rem 0.6rem;
+        font-size: 1rem;
+    }
+}
+
+.clicked {
+    font-weight: 600;
+    background-color: #F0F3F5;
+}
+
+.fix-input-height-to-selectbox {
+    height: 35px !important;
+}

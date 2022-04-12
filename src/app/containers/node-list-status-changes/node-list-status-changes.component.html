@@ -1,0 +1,22 @@
+<div class="menu-host-nav" *ngIf="nodeSeverityStatusList && nodeSeverityStatusList.length > 0">
+
+  <div class="host-status-header">
+    <div class="host-list-title">Nodes</div>
+    <div class="host-list-refresh-button" (click)="refresh()">
+      <i class="cil-reload"></i>
+    </div>
+  </div>
+
+  <div class="host-status-content" *ngFor="let nodeStatus of nodeSeverityStatusList"
+    (click)="goToNodeDetail(nodeStatus)">
+    <div class="status-img">
+      <img src="../../../assets/img/state-images/{{getStatusImage(nodeStatus)}}" alt="" height="16px">
+    </div>
+    <div class="host-name">
+      {{nodeStatus.node}}
+    </div>
+  </div>
+
+  <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+</div>

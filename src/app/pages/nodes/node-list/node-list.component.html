@@ -1,0 +1,53 @@
+<div class="card card-accent-primary">
+  <div class="card-header">
+
+    <div class="d-flex align-items-center">
+
+      <div class="title-icon">
+        <i [class]="_cardTitleIcon"></i>
+      </div>
+
+      <div><strong>Node List</strong> </div>
+
+      <div class="ml-auto">
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" popover="Window Minimize"
+          triggers="mouseenter:mouseleave" (click)="minimalizeCardBody(cardBody)"><i
+            class="cil-window-minimize"></i></button>
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" (click)="refresh()"><i
+            class="cil-reload"></i></button>
+      </div>
+    </div>
+
+  </div>
+  <div #cardBody class="card-body">
+    <div *ngIf="nodeStatuses">
+
+      <div class="host-container">
+        <div class="host link" *ngFor="let nodeStatus of nodeStatuses; index as i" (click)="chanceSelected(nodeStatus)">
+
+          <div class="storage"></div>
+          <div class="storage"></div>
+          <div class="storage"></div>
+          <div class="storage"></div>
+
+          <div class="center">
+            <span class="hostTag">Node {{i+1}}:</span> <br>
+            <strong><span class="name">{{nodeStatus.node}}</span></strong>
+          </div>
+
+          <div class="storage-light"></div>
+          <div class="storage-light"></div>
+
+          <div class="right">
+            <div [class]="getStateImageClass(nodeStatus.status)"></div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+</div>

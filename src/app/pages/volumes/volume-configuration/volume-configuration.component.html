@@ -1,0 +1,165 @@
+<div class="card">
+  <div class="card-header">
+    <div class="d-flex align-items-center">
+      <div class="node-title-icon"><i [class]="_cardVolumeChildTitleIcon"></i></div>
+      <div> Volume Configuration </div>
+      <div class="ml-auto">
+        <button type="button" class="btn btn-smx btn-success" popover="Update Config" (click)="onSubmitUI()"
+          triggers="mouseenter:mouseleave"><i class="cil-save"></i>&nbsp;Update</button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <div class="form-group row">
+      <label class="col-md-3 col-form-label text-bold" for="text-input">Delete Volume</label>
+      <div class="col-md-9">
+        <button class="btn btn-danger" (click)="deleteVolume()"><i class="fa fa-trash fa-lg"></i></button>
+      </div>
+    </div>
+
+    <div class="form-group row mt-4">
+      <label class="col-md-3 col-form-label" for="text-input">Change Status of Volume</label>
+      <div class="col-md-9">
+
+        <button class="btn btn-danger" (click)="stopVolume()"
+          *ngIf="volumeInfo && volumeInfo.status && volumeInfo.status == StatusType.Started"><i class="fa fa-stop"></i>
+          Stop Volume</button>
+        <button class="btn btn-success" (click)="startVolume()"
+          *ngIf="volumeInfo && volumeInfo.status && volumeInfo.status != StatusType.Started"><i class="fa fa-play"></i>
+          Start Volume</button>
+
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-md-3 col-form-label" for="text-input">Windows Previous Versions</label>
+      <div class="col-md-9">
+        <label class="switch switch-label switch-pill switch-outline-success-alt">
+          <input type="checkbox" class="switch-input" [ngModel]="volumeConfigParameter.versioning == OnOffTypeUI.On"
+            (change)="onCheckboxChangeToVersioning($event)">
+          <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+        </label>
+      </div>
+    </div>
+
+    <div class="form-group row">
+
+      <label class="col-md-3 col-form-label" for="text-input">Immutable Volume</label>
+      <div class="col-md-3">
+        <label class="switch switch-label switch-pill switch-outline-success-alt" (change)="onCheckboxChange($event)">
+          <input type="checkbox" class="switch-input" [ngModel]="volumeConfigParameter.worm.status == OnOffTypeUI.On">
+          <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+        </label>
+      </div>
+
+      <!-- [disabled]="volumeConfigParameter.worm.status == OnOffTypeUI.On" -->
+
+      <div class="col-md-2">
+        Begins (Second)
+        <input type="number" class="form-control"
+          [min]="volumeInfo.worm.status == OnOffTypeUI.On ? volumeInfo.worm.begins : 0"
+          [(ngModel)]="volumeConfigParameter.worm.begins" popover="Required if 'Immutable Volume' is selected"
+          triggers="mouseenter:mouseleave"
+          [class.required]="volumeConfigParameter.worm.status == OnOffTypeUI.On && volumeConfigParameter.worm.begins == 0">
+      </div>
+
+
+      <div class="col-md-2">
+        Duration (Second)
+        <input type="number" class="form-control"
+          [min]="volumeInfo.worm.status == OnOffTypeUI.On ? volumeInfo.worm.duration : 0"
+          [(ngModel)]="volumeConfigParameter.worm.duration" popover="Required if 'Immutable Volume' is selected"
+          triggers="mouseenter:mouseleave"
+          [class.required]="volumeConfigParameter.worm.status == OnOffTypeUI.On && volumeConfigParameter.worm.duration == 0">
+      </div>
+
+      <!-- <label class="col-md-2 col-form-label" for="text-input">Begins (Second)</label>
+      <div class="col-md-4">
+        <input type="number" class="form-control"
+          [min]="volumeInfo.worm.status == OnOffTypeUI.On ? volumeInfo.worm.begins : 0"
+          [(ngModel)]="volumeConfigParameter.worm.begins" popover="Required if 'Immutable Volume' is selected"
+          triggers="mouseenter:mouseleave"
+          [class.required]="volumeConfigParameter.worm.status == OnOffTypeUI.On && volumeConfigParameter.worm.begins == 0">
+      </div> -->
+
+    </div>
+
+    <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+  </div>
+
+  <div bsModal #volumeConfig="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="volumeConfigLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Configure to Volume</h4>
+          <button type="button" class="close" (click)="volumeConfig.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div [innerHTML]="getQuestion()"></div>
+          <p class="mt-3"
+            *ngIf="volumeInfo.worm.status == OnOffTypeUI.Off && volumeConfigParameter.worm.status == OnOffTypeUI.On">
+            To confirm this action, please type <span class="noselect"> <strong> "{{volumeInfo.name}}"
+              </strong>.</span>
+            <input type="text" class="form-control" placeholder="Type volume name" [(ngModel)]="typingVolumeName"
+              required [class.required]="typingVolumeName != volumeInfo.name">
+          </p>
+          <br>
+          <div class="mt-1"><strong>Do you want to continue?</strong></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="volumeConfig.hide()">Close</button>
+          <button type="button" class="btn btn-primary" (click)="onSubmit()"
+            [disabled]="volumeInfo.worm.status == OnOffTypeUI.Off && volumeConfigParameter.worm.status == OnOffTypeUI.On && typingVolumeName != volumeInfo.name">Save
+            changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div bsModal #volumeDelete="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="volumeConfigLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Delete Volume</h4>
+          <button type="button" class="close" (click)="volumeDelete.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <br>
+
+          <div>-Deleting a volume will remove the entire volume from disk!</div>
+          <div>-If it is a shared volume, the shares must be deleted first.</div>
+          <br>
+          <div class="text-danger">You can not undo this once performed.</div>
+          <br>
+
+          <div class="mt-3">
+            To confirm this action, please type <span class="noselect"> <strong> "{{volumeInfo.name}}"
+              </strong>.</span>
+            <input type="text" class="form-control" style="font-weight: bold;" placeholder="Type volume name"
+              [(ngModel)]="typingVolumeName" required [class.required]="typingVolumeName != volumeInfo.name">
+          </div>
+
+          <br>
+
+          <p class="mt-1"><strong>Do you want to continue?</strong></p>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="volumeDelete.hide()">Close</button>
+          <button type="button" class="btn btn-danger" (click)="onSubmitToDeleteVolume()"
+            [disabled]="typingVolumeName != volumeInfo.name">Delete!</button>
+        </div>
+      </div>
+    </div>
+
+    <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+  </div>

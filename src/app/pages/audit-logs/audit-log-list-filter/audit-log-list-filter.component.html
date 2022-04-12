@@ -1,0 +1,61 @@
+<div class="card card-accent-primary" style="height: 100%;">
+  <div class="card-header">
+    <div class="d-flex align-items-center">
+      <div><strong>Audit Log Filter Panel</strong></div>
+      <div class="ml-auto">
+        <button type="button" class="btn btn-smx text-primary"><i class="cil-filter"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <div>
+
+      <div class="row">
+        <div class="col" style="width: 100%;">
+          <p-multiSelect [options]="userNames" [(ngModel)]="auditFilterParameter.userNames" [optionLabel]=""
+            autoWidth="false" [style]="{'width':'100%'}" placeholder="Select User(s)" styleClass="p-inputtext-sm">
+          </p-multiSelect>
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col" style="width: 100%;">
+          <p-multiSelect [options]="shares" [(ngModel)]="auditFilterParameter.shares" optionLabel=""
+            autoWidth="false" [style]="{'width':'100%'}" placeholder="Select Share(s)"
+            styleClass="p-inputtext-sm">
+          </p-multiSelect>
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col" style="width: 100%;">
+          <p-multiSelect [options]="files" [(ngModel)]="auditFilterParameter.files" optionLabel=""
+            autoWidth="false" [style]="{'width':'100%'}" placeholder="Select File(s)" styleClass="p-inputtext-sm">
+          </p-multiSelect>
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col" style="width: 100%;">
+          <p-multiSelect [options]="operations" [(ngModel)]="auditFilterParameter.operations" optionLabel=""
+            autoWidth="false" [style]="{'width':'100%'}" placeholder="Select Operation(s)" styleClass="p-inputtext-sm">
+          </p-multiSelect>
+        </div>
+      </div>
+      <div class="row mt-1">
+        <div class="col" style="width: 100%;">
+          <p-calendar selectionMode="range" [style]="{'width':'100%'}" placeholder="Select date range"
+            [showButtonBar]="true" [(ngModel)]="date" (ngModelChange)="onBlurMethod($event)" dateFormat="dd.mm.yy">
+          </p-calendar>
+        </div>
+      </div>
+      <div class="row mt-2">
+        <div class="col" style="width: 100%;">
+          <button type="submit" class="btn btn-primary px-4 float-right" [style]="{'width':'100%'}"
+            (click)="onSubmitButton()"> <i class="cil-search"></i>&nbsp;Search</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

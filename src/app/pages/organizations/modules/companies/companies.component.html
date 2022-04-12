@@ -1,0 +1,41 @@
+<div class="card card-accent-primary" style="height: 100%;">
+    <div class="card-header padding-stabilization">
+        <div class="d-flex align-items-center">
+            <div class="title-icon">
+                <i [class]="_cardTitleIcon"></i>
+            </div>
+            <div><strong>{{getTitle()}}</strong></div>
+            <div *ngIf="isSelectedOrganization()" class="ml-auto">
+                <button *ngIf="isShowCloseButton()" type="button" (click)="closeFormComponent()" class="btn btn-smx btn-danger"><i
+                    class="fa fa-close"></i>
+                   </button>
+                <button *ngIf="isInitMode()" (click)="setFormStateToNewMode()" type="button" class="btn btn-smx btn-success"><i
+                    class="cil-plus"></i>
+                  Yeni Şirket </button>
+                <button (click)="createCompanyOnComponent()" *ngIf="isNewMode()" type="button" class="btn btn-smx btn-success"><i
+                    class="cil-save"></i>
+                  Şirket Kaydet </button>
+                <button (click)="updateCompanyOnComponent()" *ngIf="isEditMode()" type="button" class="btn btn-smx btn-success"><i
+                    class="cil-save"></i>
+                  Şirket Guncelle </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <alms-company-add-or-update></alms-company-add-or-update>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+
+                <alms-company-list></alms-company-list>
+            </div>
+        </div>
+    </div>
+
+    <ngx-loading [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+</div>

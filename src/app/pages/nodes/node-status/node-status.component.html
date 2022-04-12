@@ -1,0 +1,43 @@
+<div class="card card-accent-primary">
+  <div class="card-header">
+    <div class="d-flex align-items-center">
+      <div class="node-title-icon"><i [class]="_cardNodeTitleIcon"></i></div>
+      <div> Node Service Status<strong>{{getCardTitle()}}</strong> </div>
+      <div class="ml-auto">
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" style="padding: 2px;"
+          (click)="refresh()"><i class="cil-reload"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <p-table [value]="healthCheckListOfNode" styleClass="p-datatable-sm" [rowHover]="true" [scrollable]="true"
+      scrollHeight="400px" [resizableColumns]="true" [autoLayout]="true">
+      <ng-template pTemplate="header">
+        <tr>
+
+          <th style="width:36px">#</th>
+          <th>Status</th>
+
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-healthCheck>
+
+        <tr>
+          <td style="width:36px" class="m-4"> <img
+              src="../../../../assets/img/state-images/{{getSeverityTypeIcon(healthCheck.severity)}}" width="21px"
+              alt="{{healthCheck.severity}}">
+          </td>
+          <td>{{healthCheck.message}}</td>
+        </tr>
+
+      </ng-template>
+
+    </p-table>
+
+  </div>
+
+  <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+</div>

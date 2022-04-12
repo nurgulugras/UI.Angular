@@ -1,0 +1,51 @@
+:host{
+    th, td {
+        border: 1px solid rgb(230, 230, 230);
+        border-collapse: collapse;
+      }
+    
+    table {
+        
+        background-color: #fdfdfd;
+        width: 100%;
+
+        tr{
+            -webkit-transition: background-color 200ms linear;
+            -ms-transition: background-color 200ms linear;
+            transition: background-color 200ms linear;
+
+            &.error-row{
+                background-color: #fff0f0;
+            }
+
+            &.activeConfig{
+                background-color:rgb(226 232 236);
+                -webkit-transition: background-color 200ms linear;
+                -ms-transition: background-color 200ms linear;
+                transition: background-color 200ms linear;
+            }
+        }
+        td{
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+       
+        td:first-child {
+              border-right: 0px solid rgb(255, 255, 255) !important;
+        }
+        td:last-child {
+              border-left: 0px solid rgb(255, 255, 255) !important;
+        }
+       
+    }
+    .plpr{
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .ignore-boder-r{
+        border-right: 1px solid rgb(255, 255, 255) !important;
+    }
+    .ignore-boder-l{
+        border-left: 1px solid rgb(255, 255, 255) !important;
+    }
+}

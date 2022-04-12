@@ -1,0 +1,50 @@
+<div class="card">
+    <div class="card-header">
+        <div class="d-flex align-items-center">
+            <div class="node-title-icon"><i [class]="_cardVolumeChildTitleIcon"></i></div>
+            <div> Limit Listesi </div>
+            <div class="ml-auto">
+                <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" popover="Download Excel" triggers="mouseenter:mouseleave" (click)="exportToExcel()"><i class="cil-data-transfer-down"></i></button>
+                <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" (click)="refresh()" popover="Refresh List" triggers="mouseenter:mouseleave"><i class="cil-reload"></i></button>
+                <button type="button" class="btn btn-smx btn-ghost-secondary text-danger" popover="Yeni Limit Oluştur" triggers="mouseenter:mouseleave"><i class="cil-plus" (click)="createNewAppLimit()"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+
+        <p-table [value]="appLimits" styleClass="p-datatable-sm" [rowHover]="true" [paginator]="true" [resizableColumns]="true" [autoLayout]="true" [showCurrentPageReport]="true" [rows]="5" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+            [rowsPerPageOptions]="[5,15,50]">
+            <!-- [lazy]="true" [loading]="loading" (onLazyLoad)="loadCustomers($event)" [paginator]="true" [totalRecords]="totalRecords" [rows]="rows" -->
+
+            <ng-template pTemplate="header">
+                <tr>
+                    <th pSortableColumn="createDate" style="width: 140px;">Oluşturma Tarihi</th>
+                    <th pSortableColumn="name">Limit</th>
+                    <th>Açıklama</th>
+                    <th pSortableColumn="isActive" style="width: 100px;">Aktif Mi?</th>
+                    <th style="width: 30px;"></th>
+                </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-appLimit>
+                <tr>
+                    <td>{{dateFormat(appLimit.createDate)}}</td>
+                    <td>{{appLimit.limitName}}</td>
+                    <td>{{appLimit.description}}</td>
+                    <td style="padding: 0; text-align: center;">
+                        <button type="button" class="btn btn-success btn-pill btn-sm ml-1" *ngIf="appLimit.isActive"><i
+                class="fa fa-check"></i></button>
+                        <span *ngIf="!appLimit.isActive"> - </span>
+                    </td>
+                    <td style="padding: 0;">
+
+                        <button type="button" class="btn btn-primary btn-sm ml-1" popover="Limit Güncelle" triggers="mouseenter:mouseleave" (click)="updateAppLimit(appLimit)"><i class="cil-pen"></i></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+
+    </div>
+</div>
+
+<ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

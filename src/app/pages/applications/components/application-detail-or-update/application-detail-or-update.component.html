@@ -1,0 +1,45 @@
+<form #form [formGroup]="formGroup" id="ngForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+    <div class="form-row">
+        <div class="col-md-4 mb-3">
+            <label for="orm-id">Id</label>
+            <input type="text" name="text-input" class="form-control" placeholder="Id" formControlName="id" id="form-id" readonly>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="form-createDate">Oluşturma Tarihi</label>
+            <input type="text" name="text-input" class="form-control" placeholder="Oluşturma Tarihi" id="form-createDate" formControlName="createDate" readonly>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="form-createUserName">Oluşturan Kişi</label>
+            <input type="text" name="text-input" class="form-control" placeholder="Oluşturan Kişi" id="form-createUserName" formControlName="createUserName" readonly>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="form-name">Uygulama</label>
+            <input type="text" name="text-input" class="form-control" placeholder="Uygulama Adı" formControlName="name" id="form-name" [class.is-valid]="isEditMode() && formGroup.controls.name.valid" [readonly]="!isEditMode()" [class.is-invalid]="isEditMode() && formGroup.controls.name.invalid">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="form-apiKey">API Key</label>
+            <input type="text" name="text-input" class="form-control" placeholder="API Key" formControlName="apiKey" id="form-apiKey" readonly>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="form-apiSecretKey">Secret Key</label>
+            <input type="text" name="text-input" class="form-control" placeholder="API Secret Key" formControlName="apiSecretKey" id="form-apiSecretKey" readonly>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-12 mb-3">
+            <label for="form-isActive">Aktif Mi?</label>
+            <label class="switch switch-label switch-pill switch-outline-success-alt">
+        <input type="checkbox" class="switch-input" checked formControlName="isActive" id="form-isActive">
+        <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+      </label>
+
+        </div>
+
+    </div>
+
+
+</form>

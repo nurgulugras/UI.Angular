@@ -1,0 +1,46 @@
+<div class="card card-accent-primary" style="height: 100%;">
+    <div class="card-header padding-stabilization">
+        <div class="d-flex align-items-center">
+            <div class="title-icon">
+                <i [class]="_cardTitleIcon"></i>
+            </div>
+            <div><strong>{{getTitle()}}</strong></div>
+            <div class="ml-auto">
+                <!-- <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" (click)="refresh()"
+          [disabled]="!isEditMode()"><i class="cil-reload"></i></button> -->
+                <button type="button" class="btn btn-smx btn-primary" (click)="openAppKeyInfoComponent()" [disabled]="!isEditMode()"><i
+            class="fa fa-key"></i>
+          Key Bilgisi </button>
+                <button type="button" class="btn btn-smx btn-success" (click)="update()" [disabled]="!isEditMode()"><i
+            class="cil-save"></i>
+          Güncelle </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <alms-application-detail-or-update [application]="selectedApplication" (onUpdateApplication)="applicationUpdated($event)"></alms-application-detail-or-update>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col">
+                <tabset>
+                    <tab>
+                        <ng-template tabHeading><i class="cil-clone"></i> Ürünler</ng-template>
+                        <alms-app-products [selectedApplication]="selectedApplication" *ngIf="isEditMode()"></alms-app-products>
+                    </tab>
+                    <tab>
+                        <ng-template tabHeading><i class="cil-calendar"></i> Limitler</ng-template>
+                        <alms-app-limits [selectedApplication]="selectedApplication" *ngIf="isEditMode()"></alms-app-limits>
+                    </tab>
+
+                </tabset>
+            </div>
+        </div>
+    </div>
+
+    <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+</div>

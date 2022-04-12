@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-center align-items-center" style="height:100vh">
+    <div class="card p-4 bg-primary text-white left">
+        <div class="card-body">
+
+            <form #form [formGroup]="formGroup" id="ngForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal" (ngSubmit)="onSubmit()">
+
+                <h1>Oturum</h1>
+                <p class="text-muted" style="line-height: 0px;">Kullanıcı hesabınız ile oturum açınız.</p>
+                <div class="input-group mb-2 mt-5">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-user"></i></span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="Email" autocomplete="username" required formControlName="username" [class.is-valid]="formGroup.controls.username.valid">
+                </div>
+                <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="icon-lock"></i></span>
+                    </div>
+                    <input type="password" class="form-control" placeholder="Şifre" autocomplete="current-password" required formControlName="password" [class.is-valid]="formGroup.controls.password.valid ">
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button type="submit" [disabled]="!formGroup.valid" class="btn btn-secondary px-4 float-right">Giriş</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+</div>

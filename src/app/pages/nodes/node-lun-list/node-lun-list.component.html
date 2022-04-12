@@ -1,0 +1,52 @@
+<div class="card card-accent-primary">
+  <div class="card-header">
+    <div class="d-flex align-items-center">
+      <div class="node-title-icon"><i [class]="_cardNodeTitleIcon"></i></div>
+      <div> Node LUNS <strong>{{getCardTitle()}}</strong></div>
+      <div class="ml-auto">
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" style="padding: 2px;"
+          (click)="refresh()"><i class="cil-reload"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <p-table [value]="diskInfos" styleClass="p-datatable-sm" sortMode="multiple" [rowHover]="true"
+      [resizableColumns]="true" [autoLayout]="true">
+      <ng-template pTemplate="header">
+        <tr>
+
+          <th pSortableColumn="fileSystem">File System</th>
+          <th pSortableColumn="totalSize" style="width: 86px;">Total Size</th>
+          <th pSortableColumn="usedSize" style="width: 86px;">Used Size</th>
+          <th pSortableColumn="availableSize" style="width: 100px;">Available Size</th>
+          <th>Used Percentage</th>
+          <!-- <th>Mounted On</th> -->
+
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-diskInfo>
+
+        <tr>
+          <td>{{diskInfo.fileSystem}}</td>
+          <td>{{diskInfo.totalSize}}</td>
+          <td>{{diskInfo.usedSize}}</td>
+          <td>{{diskInfo.availableSize}}</td>
+          <td>
+            <progressbar class="progress" [max]="100" [value]="getPercentage(diskInfo.availablePercentage)">
+              <strong> {{diskInfo.availablePercentage}}</strong>
+            </progressbar>
+          </td>
+          <!-- <td>{{diskInfo.mountedOn}}</td> -->
+        </tr>
+
+      </ng-template>
+
+    </p-table>
+
+  </div>
+
+  <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+</div>

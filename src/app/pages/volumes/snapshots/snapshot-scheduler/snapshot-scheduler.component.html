@@ -1,0 +1,219 @@
+<div class="card" style="margin-bottom: 0 !important;">
+  <div class="card-header">
+    <div class="d-flex align-items-center">
+      <div class="node-title-icon"><i [class]="_cardVolumeChildTitleIcon"></i></div>
+      <div> Scheduler Configuration </div>
+      <div class="ml-auto">
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" (click)="refresh()"
+          popover="Refresh List" triggers="mouseenter:mouseleave"><i class="cil-reload"></i></button>
+        <button type="button" class="btn btn-smx btn-success" popover="Update Config" (click)="updateConfig()"
+          triggers="mouseenter:mouseleave"><i class="cil-save"></i>&nbsp;Update</button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <table *ngIf="config">
+      <tbody>
+        <tr class="tc-p border-bottom" [class.error-row]="!isValidHourlyForm(false)"
+          [class.activeConfig]="config.hourly.isActive">
+          <td style="width: 80px"><strong>&nbsp;Hourly </strong></td>
+          <td class="pt-2 pl-2 pr-2 ignore-boder-l">
+            <label class="switch switch-label switch-outline-success-alt">
+              <input type="checkbox" [(ngModel)]="config.hourly.isActive" class="switch-input"
+                [attr.checked]="config.hourly.isActive ? 'checked' : null"
+                (change)="onChangedHourlyIsActive(config.hourly.isActive)">
+              <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+            </label>
+          </td>
+          <td class="ignore-boder-r">
+            <div>Starting time:</div>
+          </td>
+          <td>
+            <div style="width: 70px;">
+              <p-calendar [(ngModel)]="config.hourly.issueTime"
+                (ngModelChange)="config.hourly.issueTime = moment($event).format('HH:mm')" [showIcon]="false"
+                [timeOnly]="true" [readonlyInput]="true" inputId="timeonly">
+              </p-calendar>
+            </div>
+          </td>
+          <td class="ignore-boder-r">
+            <div>Periodically every:</div>
+          </td>
+          <td>
+            <div style="width: 70px;">
+              <input [(ngModel)]="config.hourly.period" type="number" class="form-control" max="12" min="1">
+            </div>
+          </td>
+          <td class="ignore-boder-r">
+            <div>Keep hours for:</div>
+          </td>
+          <td>
+            <div style="width: 70px;">
+              <input [(ngModel)]="config.hourly.keepFor" type="number" class="form-control"
+                max="{{getLimitFor('keepForHourlyLimit')}}" min="1">
+            </div>
+          </td>
+        </tr>
+
+        <tr class="tc-p" [class.error-row]="!isValidDailyForm(false)" [class.activeConfig]="config.daily.isActive">
+          <td style="width: 80px" class="ignore-boder-r"><strong>&nbsp;Daily </strong></td>
+          <td class="pt-2 pl-2 pr-2 ignore-boder-l">
+            <label class="switch switch-label switch-outline-success-alt">
+              <input type="checkbox" [(ngModel)]="config.daily.isActive" class="switch-input"
+                [attr.checked]="config.daily.isActive ? 'checked' : null"
+                (change)="onChangedDailyIsActive(config.daily.isActive)">
+              <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+            </label>
+          </td>
+          <td class="ignore-boder-r">
+            <div>Every at this time:</div>
+          </td>
+          <td colspan="3">
+            <div style="width: 70px;">
+              <p-calendar [(ngModel)]="config.daily.issueTime"
+                (ngModelChange)="config.daily.issueTime = moment($event).format('HH:mm')" [showIcon]="false"
+                [timeOnly]="true" [readonlyInput]="true" inputId="timeonly">
+              </p-calendar>
+            </div>
+          </td>
+          <td class="ignore-boder-r">
+            <div>Keep daily for:</div>
+          </td>
+          <td>
+            <div style="width: 70px;">
+              <input [(ngModel)]="config.daily.keepFor" type="number" class="form-control"
+                max="{{getLimitFor('keepForDailyLimit')}}" min="1">
+            </div>
+          </td>
+        </tr>
+
+        <tr class="tc-p" [class.error-row]="!isValidWeeklyForm(false)" [class.activeConfig]="config.weekly.isActive">
+          <td style="width: 80px"><strong>&nbsp;Weekly </strong></td>
+          <td class="pt-2 pl-2 pr-2 ignore-boder-l">
+            <label class="switch switch-label switch-outline-success-alt">
+              <input [(ngModel)]="config.weekly.isActive" type="checkbox" class="switch-input"
+                [attr.checked]="config.weekly.isActive ? 'checked' : null"
+                (change)="onChangedWeeklyIsActive(config.weekly.isActive)">
+              <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+            </label>
+          </td>
+          <td class="ignore-boder-r">
+            <div>Every this day:</div>
+          </td>
+          <td>
+            <div>
+              <p-dropdown [(ngModel)]="config.weekly.weekday" [options]="daysOfWeek" optionLabel=""></p-dropdown>
+            </div>
+          </td>
+          <td class="ignore-boder-r">
+            <div>Every at this time:</div>
+          </td>
+          <td>
+            <div style="width: 70px;">
+              <p-calendar [(ngModel)]="config.weekly.issueTime"
+                (ngModelChange)="config.weekly.issueTime = moment($event).format('HH:mm')" [showIcon]="false"
+                [timeOnly]="true" [readonlyInput]="true">
+              </p-calendar>
+            </div>
+          </td>
+          <td class="ignore-boder-r">
+            <div>Keep week for :</div>
+          </td>
+          <td colspan="3">
+            <div style="width: 70px;">
+              <input [(ngModel)]="config.weekly.keepFor" type="number" class="form-control"
+                max="{{getLimitFor('keepForWeeklyLimit')}}" min="1">
+            </div>
+          </td>
+        </tr>
+
+        <tr class="tc-p" [class.error-row]="!isValidMounthlyForm(false)"
+          [class.activeConfig]="config.mounthly.isActive">
+          <td style="width: 80px"><strong>&nbsp;Monthly </strong></td>
+          <td class="pt-2 pl-2 pr-2 ignore-boder-l">
+            <label class="switch switch-label switch-outline-success-alt">
+              <input [(ngModel)]="config.mounthly.isActive" type="checkbox" class="switch-input"
+                [attr.checked]="config.mounthly.isActive ? 'checked' : null"
+                (change)="onChangedMonthlyIsActive(config.mounthly.isActive)">
+              <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+            </label>
+          </td>
+          <td class="ignore-boder-r">
+            <div>Every this day:</div>
+          </td>
+          <td>
+            <div>
+              <p-dropdown [(ngModel)]="config.mounthly.mounthDay" [options]="days" optionLabel=""></p-dropdown>
+            </div>
+          </td>
+          <td class="ignore-boder-r">
+            <div>Every at this time:</div>
+          </td>
+          <td>
+            <div style="width: 70px;">
+              <p-calendar [(ngModel)]="config.mounthly.issueTime"
+                (ngModelChange)="config.mounthly.issueTime = moment($event).format('HH:mm')" [showIcon]="false"
+                [timeOnly]="true" [readonlyInput]="true">
+              </p-calendar>
+            </div>
+          </td>
+          <td class="ignore-boder-r">
+            <div>Keep month for :</div>
+          </td>
+          <td colspan="3">
+            <div style="width: 70px;">
+              <input [(ngModel)]="config.mounthly.keepFor" type="number" class="form-control"
+                max="{{getLimitFor('keepForMounthlyLimit')}}" min="1">
+            </div>
+          </td>
+        </tr>
+
+        <tr class="tc-p" [class.error-row]="!isValidYearlyForm(false)" [class.activeConfig]="config.yearly.isActive">
+          <td style="width: 80px"><strong>&nbsp;Yearly </strong></td>
+          <td class="pt-2 pl-2 pr-2  ignore-boder-l">
+            <label class="switch switch-label switch-outline-success-alt">
+              <input [(ngModel)]="config.yearly.isActive" type="checkbox" class="switch-input"
+                [attr.checked]="config.yearly.isActive ? 'checked' : null"
+                (change)="onChangedYearlyIsActive(config.yearly.isActive)">
+              <span class="switch-slider" data-checked="On" data-unchecked="Off"></span>
+            </label>
+          </td>
+          <td class="ignore-boder-r">
+            <div>Every at this date:</div>
+          </td>
+          <td>
+            <div>
+              <p-calendar [(ngModel)]="config.yearly.issueDate" dateFormat="d MM yy" [showIcon]="true"
+                [readonlyInput]="true"></p-calendar>
+            </div>
+          </td>
+          <td class="ignore-boder-r">
+            <div>Every at this time:</div>
+          </td>
+          <td>
+            <div style="width: 70px;">
+              <p-calendar [(ngModel)]="config.yearly.issueTime"
+                (ngModelChange)="config.yearly.issueTime = moment($event).format('HH:mm')" [showIcon]="false"
+                [timeOnly]="true" [readonlyInput]="true" inputId="timeonly">
+              </p-calendar>
+            </div>
+          </td>
+          <td class="ignore-boder-r">
+            <div>Keep year for:</div>
+          </td>
+          <td colspan="3">
+            <div style="width: 70px;">
+              <input [(ngModel)]="config.yearly.keepFor" type="number" class="form-control"
+                max="{{getLimitFor('keepForYearlyLimit')}}" min="1">
+            </div>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

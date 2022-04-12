@@ -1,0 +1,42 @@
+<form #form [formGroup]="formGroup" id="ngForm" action="" method="post" enctype="multipart/form-data"
+  class="form-horizontal" (ngSubmit)="onSubmit()">
+
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="text-input">Host Name</label>
+    <div class="col-md-9">
+      <input type="text" name="text-input" class="form-control" placeholder="Enter Host Name"
+        formControlName="host"
+        [class.is-valid]="formGroup.controls.host.valid"
+        [class.is-invalid]="formGroup.controls.host.invalid">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="text-input">Domain Name</label>
+    <div class="col-md-9">
+      <input type="text" name="text-input" class="form-control" placeholder="Enter Domain Name"
+        formControlName="domain"
+        [class.is-valid]="formGroup.controls.domain.valid"
+        [class.is-invalid]="formGroup.controls.domain.invalid">
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-md-3 col-form-label" for="text-input">Port</label>
+    <div class="col-md-9">
+      <input type="number" name="text-input" class="form-control" placeholder="Enter Port Number"
+        formControlName="port"
+        [class.is-valid]="formGroup.controls.port.valid"
+        [class.is-invalid]="formGroup.controls.port.invalid">
+    </div>
+  </div>
+
+  <!-- <div style="display: flex; justify-content: flex-end;">
+
+    <button [disabled]="!formGroup.valid" type="submit" form="ngForm" class="btn btn-sm btn-primary ml-2"
+      (click)="form.ngSubmit"><i class="fa fa-dot-circle-o"></i> Update</button>
+  </div> -->
+
+</form>
+
+<ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>

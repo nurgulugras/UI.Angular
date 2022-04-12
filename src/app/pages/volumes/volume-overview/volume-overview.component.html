@@ -1,0 +1,47 @@
+<div class="card card-accent-primary" style="height: 100%;">
+  <div class="card-header padding-stabilization">
+    <div class="d-flex align-items-center">
+      <div class="title-icon">
+        <i [class]="_cardTitleIcon"></i>
+      </div>
+      <div><strong>Volume Overview {{getTitle()}}</strong></div>
+      <div class="ml-auto">
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" (click)="refresh()"><i
+            class="cil-reload"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col">
+        <esa-volume-info [volumeInfo]="volumeInfo"></esa-volume-info>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <tabset>
+          <tab>
+            <ng-template tabHeading><i class="cil-clone"></i> Snapshots</ng-template>
+            <esa-snapshot-list [selectedVolume]="selectedVolume" [volumeInfo]="volumeInfo"
+              *ngIf="selectedVolume && volumeInfo" (refreshToAll)="refresh()">
+            </esa-snapshot-list>
+          </tab>
+          <tab>
+            <ng-template tabHeading><i class="cil-calendar"></i> Snapshots Schedule</ng-template>
+            <esa-snapshot-scheduler [selectedVolume]="selectedVolume" *ngIf="selectedVolume && volumeInfo">
+            </esa-snapshot-scheduler>
+          </tab>
+          <tab>
+            <ng-template tabHeading><i class="cil-cog"></i> Configurations</ng-template>
+            <esa-volume-configuration [volumeInfo]="volumeInfo" *ngIf="selectedVolume && volumeInfo"
+              (refreshToAll)="refresh()" (onVolumeDeleted)="volumeDeleted()"></esa-volume-configuration>
+          </tab>
+        </tabset>
+      </div>
+    </div>
+  </div>
+
+  <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+</div>

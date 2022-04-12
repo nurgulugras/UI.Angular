@@ -1,0 +1,105 @@
+<div class="card card-accent-primary">
+  <div class="card-header">
+    <div class="d-flex align-items-center">
+      <div class="title-icon">
+        <i [class]="_cardTitleIcon"></i>
+      </div>
+      <div><strong>Mail Settings</strong></div>
+      <div class="ml-auto">
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" popover="Window Minimize"
+          triggers="mouseenter:mouseleave" (click)="minimalizeCardBody(cardBody)"><i
+            class="cil-window-minimize"></i></button>
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" popover="Refresh"
+          triggers="mouseenter:mouseleave" (click)="refresh()"><i class="cil-reload"></i></button>
+        <button type="button" class="btn btn-smx btn-primary mr-1" (click)="sendTestMail()" [disabled]="!isEditMode()"><i
+            class="fa fa-envelope fa-lg ml-1 mr-1"></i>&nbsp;Test Mail</button>
+        <button type="button" class="btn btn-smx btn-success" (click)="saveOrUpdateMailProvider()"><i
+            class="fa fa-save fa-lg mr-1 ml-1"></i>&nbsp;Update</button>
+      </div>
+    </div>
+  </div>
+  <div #cardBody class="card-body">
+
+    <form #form [formGroup]="formGroup" id="ngForm" action="" method="post" enctype="multipart/form-data"
+      class="form-horizontal" (ngSubmit)="onSubmit()">
+
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Host Name</label>
+        <div class="col-md-4">
+          <input type="text" name="text-input" class="form-control" placeholder="Enter Host Name" formControlName="host"
+            [class.is-valid]="formGroup.controls.host.valid" [class.is-invalid]="formGroup.controls.host.invalid">
+        </div>
+
+        <label class="col-md-2 col-form-label" for="text-input">Port</label>
+        <div class="col-md-4">
+          <input type="number" name="text-input" class="form-control" placeholder="Enter Port Number"
+            formControlName="port" [class.is-valid]="formGroup.controls.port.valid"
+            [class.is-invalid]="formGroup.controls.port.invalid">
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Username</label>
+        <div class="col-md-4">
+          <input type="text" name="text-input" class="form-control" placeholder="Enter Username"
+            formControlName="username" [class.is-valid]="formGroup.controls.username.valid"
+            [class.is-invalid]="formGroup.controls.username.invalid">
+        </div>
+        <label class="col-md-2 col-form-label" for="text-input">Password</label>
+        <div class="col-md-4">
+          <input type="password" name="text-input" class="form-control" placeholder="Enter Password"
+            formControlName="password" [class.is-valid]="formGroup.controls.password.valid"
+            [class.is-invalid]="formGroup.controls.password.invalid" password>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Sender Mail Address</label>
+        <div class="col-md-4">
+          <input type="text" name="text-input" class="form-control" placeholder="Enter Sender Mail Address"
+            formControlName="senderMail" [class.is-valid]="formGroup.controls.senderMail.valid"
+            [class.is-invalid]="formGroup.controls.senderMail.invalid" email>
+        </div>
+        <label class="col-md-2 col-form-label" for="text-input">Sender Display Name</label>
+        <div class="col-md-4">
+          <input type="text" name="text-input" class="form-control" placeholder="Enter Sender Display Name"
+            formControlName="senderDisplayName" [class.is-valid]="formGroup.controls.senderDisplayName.valid"
+            [class.is-invalid]="formGroup.controls.senderDisplayName.invalid">
+        </div>
+      </div>
+
+
+
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Use Default Credentials</label>
+        <div class="col-md-4">
+          <label class="switch switch-label switch-pill switch-outline-success-alt">
+            <input type="checkbox" class="switch-input" checked formControlName="useDefaultCredentials">
+            <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+          </label>
+        </div>
+        <label class="col-md-2 col-form-label" for="text-input">Use Basic Authentication</label>
+        <div class="col-md-4">
+          <label class="switch switch-label switch-pill switch-outline-success-alt">
+            <input type="checkbox" class="switch-input" checked formControlName="useBasicAuthentication">
+            <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="text-input">Enable SSL</label>
+        <div class="col-md-4">
+          <label class="switch switch-label switch-pill switch-outline-success-alt">
+            <input type="checkbox" class="switch-input" checked formControlName="enableSSL">
+            <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+          </label>
+        </div>
+      </div>
+
+    </form>
+
+    <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+  </div>
+</div>

@@ -1,0 +1,90 @@
+:host{
+
+    .host-container{
+        
+        display:inline-flex;
+        flex-wrap: wrap;
+
+        .host{
+
+            display:inline-flex;
+            border: 3px solid;
+            padding: 10px;
+            border-radius: 10px;
+            width: 340px;
+            height: 100px;
+            margin: 10px;
+
+            transition: all .2s ease-in-out;
+
+            &:hover{
+                transform: scale(1.03);
+            }
+    
+            .storage{
+                border-left: 6px solid #757575;
+                padding-right: 6px;
+            }
+
+            .storage-light{
+                border-left: 2px solid #dfdfdf;
+                padding-right: 2px;
+            }
+    
+            .center{
+                color: #24a9d8;
+                padding: 8px;
+                width: 100%;
+                background-color: rgb(246, 246, 246);
+                font-size: 1.36em;
+                line-height: 1.429rem;
+
+                .name{
+                    padding-left: 6px;
+                }
+                .hostTag{
+                    color: gray !important;
+                    font-size: 1rem;
+                }
+            }
+    
+            .right{
+                width: 60px;
+                background-color: rgb(246, 246, 246);
+            }
+    
+            .green {
+                background-image: -webkit-linear-gradient(top, #13fB04 0%, #58e343 50%, #ADED99 100%);
+            }
+            .orange {
+                background-image: -webkit-linear-gradient(top, #f9a004 0%, #e0ac45 50%, #ead698 100%);
+            }
+            .red {
+                background-image: -webkit-linear-gradient(top, #fb1304 0%, #e35843 50%, #edad99 100%);
+            }
+            .black {
+                background-image: -webkit-linear-gradient(top, #000000 0%, #1d1d1d 50%, #3d3d3d 100%);
+            }
+            .led {
+                border-radius: 3px;
+                width: 3px;
+                height: 3px;
+                box-shadow: 0px 0px 1px black;
+                margin: 3px;
+                zoom: 5;
+            }
+            .led:after {
+                display: block;            
+                content: '';
+                margin-left: 1px;
+                margin-right: 1px;
+                -webkit-border-top-right-radius: 4px 3px;
+                -webkit-border-top-left-radius: 4px 3px;
+                -webkit-border-bottom-right-radius: 4px 3px;
+                -webkit-border-bottom-left-radius: 4px 3px;
+                background-image: -webkit-linear-gradient(top, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.2) 100%);
+            }
+        }
+    }
+    
+}

@@ -1,0 +1,66 @@
+<div class="card card-accent-primary">
+    <div class="card-header">
+        <div class="d-flex align-items-center">
+            <div class="title-icon">
+                <i [class]="_cardTitleIcon"></i>
+            </div>
+            <div><strong>Notification Settings</strong></div>
+            <div class="ml-auto">
+                <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" popover="Window Minimize" triggers="mouseenter:mouseleave" (click)="minimalizeCardBody(cardBody)"><i
+            class="cil-window-minimize"></i></button>
+            </div>
+        </div>
+    </div>
+    <div #cardBody class="card-body">
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="2" style="width: 500px">Email Users</th>
+                    <th colspan="4">Severities</th>
+                    <th rowspan="2" style="width: 80px;">
+                        <button type="button" class="btn btn-sm btn-primary" (click)="addNewItem()"><i
+                class="fa fa-plus fa-lg mr-1 ml-1"></i></button>
+                    </th>
+                </tr>
+                <tr>
+                    <th style="width: 90px;">Info</th>
+                    <th style="width: 90px;">Warning</th>
+                    <th style="width: 90px;">Error</th>
+                    <th style="width: 90px;">Critical</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let config of severityNotifyConfigs">
+                    <td><input type="text" name="text-input" class="form-control" placeholder="Enter user(s) email" [class.required]="!isValidEmails(config)" [(ngModel)]="config.userMails">
+                    </td>
+                    <td class="center">
+                        <p-checkbox [(ngModel)]="config.isSelectedSeverityInfo" binary="true" [styleClass]="isSelectedAnySeverityType(config) ? '' : 'required'"></p-checkbox>
+                    </td>
+                    <td class="center">
+                        <p-checkbox [(ngModel)]="config.isSelectedSeverityWarning" binary="true" [styleClass]="isSelectedAnySeverityType(config) ? '' : 'required'"></p-checkbox>
+                    </td>
+                    <td class="center">
+                        <p-checkbox [(ngModel)]="config.isSelectedSeverityError" binary="true" [styleClass]="isSelectedAnySeverityType(config) ? '' : 'required'"></p-checkbox>
+                    </td>
+                    <td class="center">
+                        <p-checkbox [(ngModel)]="config.isSelectedSeverityCritical" binary="true" [styleClass]="isSelectedAnySeverityType(config) ? '' : 'required'"></p-checkbox>
+                    </td>
+                    <td class="center">
+
+                        <button type="button" class="btn btn-sm btn-success mr-1" popover="Save this config" *ngIf="!isEditConfigState(config)" triggers="mouseenter:mouseleave" (click)="saveConfig(config)"><i
+                class="fa fa-save fa-lg"></i></button>
+                        <button type="button" class="btn btn-sm btn-danger hidden-hover" (click)="deleteNewItem(config)" popover="Delete this config" triggers="mouseenter:mouseleave"><i class="fa fa-trash fa-lg"></i></button>
+                        <button type="button" class="btn btn-sm btn-success hidden-hover ml-1" popover="Update this config" *ngIf="isEditConfigState(config)" triggers="mouseenter:mouseleave" (click)="updateConfig(config)"><i
+                class="fa fa-refresh fa-lg"></i></button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+
+        <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+    </div>
+</div>

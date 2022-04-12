@@ -1,0 +1,95 @@
+<div class="card card-accent-primary">
+  <div class="card-header padding-stabilization">
+    <div class="d-flex align-items-center">
+      <div class="title-icon">
+        <i [class]="_cardTitleIcon"></i>
+      </div>
+      <div><strong>Logs</strong></div>
+      <div class="ml-auto">
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" popover="Download Excel"
+          triggers="mouseenter:mouseleave" (click)="exportToExcel()"><i class="cil-data-transfer-down"></i></button>
+        <button type="button" class="btn btn-smx btn-ghost-secondary text-dark" popover="Refresh"
+          triggers="mouseenter:mouseleave" (click)="refresh()"><i class="cil-reload"></i></button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+
+    <p-table [value]="activityLogs" styleClass="p-datatable-sm" sortMode="multiple" [rowHover]="true" [paginator]="true"
+      [multiSortMeta]="[{field: 'createDate', order: -1}]" [showCurrentPageReport]="true" [lazy]="true"
+      (onLazyLoad)="loadLogs($event)" [paginator]="true" [totalRecords]="totalRecords" [rows]="rows"
+      currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+      [rowsPerPageOptions]="tableRowsPers">
+      <ng-template pTemplate="header">
+        <tr>
+
+          <th pSortableColumn="severity" style="width: 30px;" class="text-align-center">#</th>
+          <th pSortableColumn="createDate" style="width:150px;">Create Date </th>
+          <th style="width: 140px;">Create User</th>
+          <th pSortableColumn="severity" style="width: 140px;">Severity</th>
+          <th pSortableColumn="crudType" style="width: 140px;">Crud Type</th>
+          <th pSortableColumn="logCategory" style="width: 140px;">Log Category</th>
+          <th pSortableColumn="message" style="width: 100%">Message</th>
+          <th style="width: 70px">Changes</th>
+
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-activityLog>
+        <tr [style.background-color]="getSeverityBackgroundColor(activityLog.severity)">
+          <td class="m-4"> <img
+              src="../../../../../../assets/img/state-images/{{getSeverityTypeIcon(activityLog.severity)}}" width="21px"
+              alt="{{activityLog.severity}}">
+          </td>
+          <td>{{dateFormat(activityLog.createDate)}}</td>
+          <td>{{activityLog.userName}}</td>
+          <td>{{activityLog.severity}}</td>
+          <td>{{activityLog.crudType}}</td>
+          <td>{{activityLog.logCategory}}</td>
+          <td>
+            <div [innerHTML]="activityLog.message | replaceLineBreaks"></div>
+          </td>
+          <td style="padding: 0; text-align: center;">
+            <button type="button" *ngIf="activityLog.changes" class="btn btn-primary btn-sm" popover="Show changes"
+              triggers="mouseenter:mouseleave" (click)="showChanges(activityLog.changes)"><i
+                class="cil-magnifying-glass"></i></button>
+          </td>
+          <!-- <td>
+            <div [innerHTML]="activityLog.changes | replaceLineBreaks"></div>
+          </td> -->
+        </tr>
+
+      </ng-template>
+
+    </p-table>
+
+  </div>
+
+  <ngx-loading [show]=" _isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+</div>
+
+
+<div bsModal #changesDetailPanel="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+  aria-labelledby="volumeConfigLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Changes</h4>
+      </div>
+      <div class="modal-body">
+
+        <br>
+        <div [innerHTML]="changes | replaceLineBreaks"></div>
+        <br>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="changesDetailPanel.hide()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+</div>

@@ -1,0 +1,13 @@
+:host {
+    .flex-container {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        height: 100%;
+        .flex-item {
+            padding: 6px;
+        }
+    }
+}

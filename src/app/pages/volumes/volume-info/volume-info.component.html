@@ -1,0 +1,95 @@
+<table class="table table-bordered table-sm">
+  <tbody>
+    <tr>
+      <td class="bg-light" style="width: 180px; min-width: 140px;">Volume Name</td>
+      <td><strong>{{volumeInfo.name}}</strong> </td>
+    </tr>
+    <!-- <tr>
+      <td class="bg-light">Volume Unique Id</td>
+      <td>{{volumeInfo.volumeId}}</td>
+    </tr>
+    <tr>
+      <td class="bg-light">Type</td>
+      <td>{{volumeInfo.type}}</td>
+    </tr> -->
+    <tr>
+      <td class="bg-light">Status</td>
+      <td>
+
+        <container-element [ngSwitch]="volumeInfo.status" *ngIf="volumeInfo && volumeInfo.status">
+          <button type="button" class="btn btn-brand btn-sm btn-vimeo mr-1" *ngSwitchCase="statusTypeUI.Started">
+            <i class="fa fa-check"></i>
+            <span>Online</span>
+          </button>
+          <button type="button" class="btn btn-brand btn-sm btn-html5 mr-1" *ngSwitchCase="statusTypeUI.Stopped">
+            <i class="fa fa-times"></i>
+            <span>Offline</span>
+          </button>
+          <button *ngSwitchDefault type="button" class="btn btn-brand btn-sm btn-openid mr-1">
+            <i class="fa fa-info"></i>
+            <span>{{volumeInfo.status}}</span>
+          </button>
+          <span></span>
+        </container-element>
+
+      </td>
+    </tr>
+    <tr>
+      <td class="bg-light">Windows Previous Versions</td>
+      <td>
+        <container-element [ngSwitch]="volumeInfo.versioning">
+          <button type="button" class="btn btn-brand btn-sm btn-vimeo mr-1" *ngSwitchCase="onOffTypeUI.On">
+            <i class="fa fa-check"></i>
+            <span>On</span>
+          </button>
+          <button type="button" class="btn btn-brand btn-sm btn-html5 mr-1" *ngSwitchCase="onOffTypeUI.Off">
+            <i class="fa fa-times"></i>
+            <span>Off</span>
+          </button>
+          <span *ngSwitchDefault>{{volumeInfo.versioning}}</span>
+        </container-element>
+      </td>
+    </tr>
+    <tr>
+      <td class="bg-light">Immutable Volume</td>
+      <td>
+        <container-element [ngSwitch]="volumeInfo.worm.status">
+          <button type="button" class="btn btn-brand btn-sm btn-vimeo mr-1" *ngSwitchCase="onOffTypeUI.On">
+            <i class="fa fa-check"></i>
+            <span>On</span>
+          </button>
+          <button type="button" class="btn btn-brand btn-sm btn-html5 mr-1" *ngSwitchCase="onOffTypeUI.Off">
+            <i class="fa fa-times"></i>
+            <span>Off</span>
+          </button>
+          <span *ngSwitchDefault>{{volumeInfo.worm.status}}</span>
+        </container-element>
+      </td>
+    </tr>
+    <tr>
+      <td class="bg-light">Begins</td>
+      <td>{{timeFormatToAgo(volumeInfo.worm.begins)}}</td>
+    </tr>
+    <tr>
+      <td class="bg-light">Duration</td>
+      <td>{{timeFormatToAgo(volumeInfo.worm.duration)}}</td>
+    </tr>
+    <tr>
+      <td class="bg-light">Snapshot Count</td>
+      <td>{{volumeInfo.snapshots}}</td>
+    </tr>
+    <!-- <tr>
+      <td class="bg-light">Placement Rule</td>
+      <td>{{volumeInfo.numberOfBricks}}</td>
+    </tr>
+    <tr>
+      <td class="bg-light">Transport Type</td>
+      <td>{{volumeInfo.transportType}}</td>
+    </tr> -->
+
+    <!-- <tr>
+      <td class="bg-light">Nodes</td>
+      <td>{{volumeInfo.bricks}}</td>
+    </tr> -->
+  </tbody>
+</table>

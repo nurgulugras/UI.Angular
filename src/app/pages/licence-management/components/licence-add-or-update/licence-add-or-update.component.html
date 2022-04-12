@@ -1,0 +1,172 @@
+<form #form="ngForm" [formGroup]="formGroup" id="ngForm" action="" method="post" enctype="multipart/form-data" class="form-horizontal w-75">
+    <div class="form-row">
+        <div class="col-md-2 mb-2">
+            <label class="float-right pt-2" for="form-id">Oluşturma Tarihi</label>
+        </div>
+        <div class="col-md-4 mb-3 ">
+            <input type="text" name="text-input" class="form-control" placeholder="Oluşturma Tarihi" [attr.disabled]="true" formControlName="createDate">
+        </div>
+        <div class="col-md-2 mb-3">
+            <label class="float-right pt-2" for="form-id">Oluşturan Kişi</label>
+        </div>
+        <div class="col-md-4 mb-3">
+            <input type="text" name="text-input" class="form-control" placeholder="Oluşturan Kişi" [attr.disabled]="true" formControlName="createUserName">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2 mb-2">
+            <label class="float-right pt-2" for="isActive-input">Kayıtlı Mı?</label>
+        </div>
+        <div class="col-md-4 mb-3 ">
+            <label class="switch switch-label switch-pill switch-outline-success-alt" [class.noclick]="">
+                <input type="checkbox" class="switch-input" [attr.disabled]="true" checked formControlName="isRegistered">
+                <span class="switch-slider" data-checked="&#x2713;" data-unchecked="&#x2715;"></span>
+              </label>
+        </div>
+        <div class="col-md-2 mb-3">
+            <label class="float-right pt-2" for="form-id">Kayıt Onay Tarihi</label>
+        </div>
+        <div class="col-md-4 mb-3">
+            <input type="text" name="text-input" class="form-control" placeholder="Kayıt Onay Tarihi" [attr.disabled]="true" formControlName="registeredDate">
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2 mb-2">
+            <label class="float-right pt-2" for="form-id">Lisans</label>
+        </div>
+        <div class="col-md-4 mb-3 ">
+            <input type="text" name="text-input" style="width: 100%;" class="form-control" [(ngModel)]="generateLicense" [attr.disabled]="true" placeholder="Lisans" formControlName="licenseNo">
+        </div>
+        <div class="col-md-2 mb-3">
+            <label class="float-right pt-2" for="form-id">Lisans Adı</label>
+
+        </div>
+        <div class="col-md-4 mb-3">
+            <input type="text" name="text-input" [readonly]="!isEditableForm()" class="form-control" placeholder="Lisans Adı" formControlName="name" [class.is-valid]="isEditableForm() && formGroup.controls.name.valid" [class.is-invalid]="isEditableForm() && formGroup.controls.name.invalid">
+
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2 mb-2">
+            <label class="float-right pt-2" for="form-id">Şirket</label>
+        </div>
+        <div class="col-md-4 mb-3 ">
+            <p-dropdown id="volume-input " [style]="{'width':'100%'}" [options]="companies" optionLabel="name" optionValue="id" autoWidth="false" [showClear]="true" placeholder="Şirket Seçimi" [styleClass]="!isEditableForm() ? '' : formGroup.controls.companyId.valid ? 'dropdown-input-style' : 'dropdown-input-style required'"
+                formControlName="companyId" [disabled]="!isEditableForm()"></p-dropdown>
+        </div>
+        <div class="col-md-2 mb-3">
+            <label class="float-right pt-2" for="form-id">Uygulama</label>
+
+        </div>
+        <div class="col-md-4 mb-3">
+            <p-dropdown (onChange)="onChangeToApplication($event)" id="volume-input" [style]="{'width':'100%'}" [options]="applications" optionLabel="name" optionValue="id" autoWidth="false" placeholder="Uygulama Seçimi" [showClear]="true" [filter]="true" placeholder="Uygulama Seçimi"
+                [styleClass]="!isEditableForm() ? '' : formGroup.controls.appId.valid ? 'dropdown-input-style' : 'dropdown-input-style required'" formControlName="appId" [disabled]="!isEditableForm()">
+            </p-dropdown>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2 mb-2">
+            <label class="float-right pt-2" for="form-id">Başlangıç Tarihi</label>
+        </div>
+        <div class="col-md-4 mb-3 ">
+            <p-calendar [style]="{'width':'100%'}" placeholder="Tarih Seçiniz" formControlName="startDate" dateFormat="dd.mm.yy" [disabled]="!isEditableForm()" [styleClass]="!isEditableForm() ? '' : formGroup.controls.appId.valid ? 'dropdown-input-style' : 'dropdown-input-style required'"></p-calendar>
+        </div>
+        <div class="col-md-2 mb-3">
+            <label class="float-right pt-2" for="form-id">Bitiş Tarihi</label>
+
+        </div>
+        <div class="col-md-4 mb-3">
+            <p-calendar [style]="{'width':'100%'}" placeholder="Tarih Seçiniz" formControlName="endDate" dateFormat="dd.mm.yy" [disabled]="true"></p-calendar>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-2 mb-2">
+            <label class="float-right pt-2 " for="form-id">Periyot</label>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="d-flex justify-content-between w-100">
+                <div>
+                    <input type="number" name="text-input" style="width: 80px;" class="form-control  fix-input-height-to-selectbox " placeholder="Limit" formControlName="licensePeriod" [class.is-valid]="isEditableForm() && formGroup.controls.licensePeriod.valid" [class.is-invalid]="isEditableForm() && formGroup.controls.licensePeriod.invalid "
+                        [readonly]="!isEditableForm()">
+                </div>
+                <div class=" float-left">
+                    <p-dropdown id="volume-input" class="ml-2" [style]="{'width':'200px'}" [options]="periodTypes" optionLabel="" optionValue="" [showClear]="true" placeholder="Periyot Seçiniz" [styleClass]="!isEditableForm() ? '' : formGroup.controls.licensePeriodType.valid ? 'dropdown-input-style' : 'dropdown-input-style required'"
+                        formControlName="licensePeriodType" [disabled]="!isEditableForm()">
+                    </p-dropdown>
+                </div>
+
+            </div>
+        </div>
+        <div class="col-md-2 mb-3">
+
+            <label class="float-right pt-2" for="form-id">Oturum Limiti</label>
+        </div>
+        <div class="col-md-4 mb-3">
+            <input type="number" [min]="minSession" name="text-input" style="width: 80px;" class="form-control fix-input-height-to-selectbox " placeholder="Limit" formControlName="sessionLimit" [class.is-valid]="isEditableForm() && formGroup.controls.sessionLimit.valid"
+                [class.is-invalid]="isEditableForm() && formGroup.controls.sessionLimit.invalid" [readonly]="!isEditableForm()">
+        </div>
+    </div>
+</form>
+
+<div class="row pl-4 pt-5" style="width: 77%;">
+    <div class="col-md-6">
+        <div class="card w-100">
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <div class="node-title-icon"><i [class]="_cardVolumeChildTitleIcon"></i></div>
+                    <div>Lisans Ürünleri</div>
+                    <div class="ml-auto">
+                        <button type="button" class="btn btn-outline-primary btn-sm" *ngIf="isEditableForm()" (click)="addNewLicenseProductToList()"><i
+                                class="fa fa-plus fa-lg mr-1 ml-1"></i> Yeni Ürün</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div *ngFor="let licenseProduct of licenseProducts" class="pb-1">
+                    <div class="d-flex p-1 w-100" [class.invalid-component]="!isValidProduct(licenseProduct)">
+                        <div class="w-100">
+                            <p-dropdown id="volume-input " [(ngModel)]="licenseProduct.appProductId" [style]="{'width':'100%'}" [options]="appProducts" optionLabel="product" optionValue="id" class="fix-input-height-to-selectbox" autoWidth="false" [showClear]="true" placeholder="Ürün Seçimi"
+                                [disabled]="!isEditableForm()"></p-dropdown>
+                        </div>
+                        <div class="flex-shrink-1 align-self-center pl-2">
+                            <button type="button" class="btn btn-sm btn-danger hidden-hover " (click)="deleteSelectedLicenseFromList(licenseProduct)" popover="Delete this config" triggers="mouseenter:mouseleave"><i class="fa fa-trash fa-lg" ></i></button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+
+        <div class="card w-100">
+
+            <div class="card-header">
+                <div class="d-flex align-items-center">
+                    <div class="node-title-icon"><i [class]="_cardVolumeChildTitleIcon"></i></div>
+                    <div> Lisans Limitleri </div>
+                    <div class="ml-auto">
+                        <button type="button" class="btn btn-outline-primary btn-sm" *ngIf="isEditableForm()" (click)="addNewLicenseLimitToList()"><i
+                                class="fa fa-plus fa-lg mr-1 ml-1"></i> Yeni Limit</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body ">
+                <div *ngFor="let licenseLimit of licenseLimits" class="d-flex pb-1">
+                    <div class="d-flex p-1 w-100" [class.invalid-component]="!isValidLimit(licenseLimit)">
+                        <div class="w-100">
+                            <p-dropdown id="volume-input" [style]="{'width':'100%'}" [(ngModel)]="licenseLimit.appLimitId" [options]="appLimits" optionLabel="limitName" optionValue="id" autoWidth="false" [showClear]="true" placeholder="Limit Seçimi" [disabled]="!isEditableForm()"></p-dropdown>
+                        </div>
+                        <div>
+                            <input type="number" name="text-input" style="width: 80px;" [(ngModel)]="licenseLimit.limit" class=" ml-2 fix-input-height-to-selectbox " placeholder="Limit" [readonly]="!isEditableForm()">
+                        </div>
+                        <div class="flex-shrink-1 align-self-center pl-2">
+                            <button type="button" class="btn btn-sm btn-danger hidden-hover" (click)="deleteSelectedLicenseLimitFromList(licenseLimit)" popover="Delete this config" triggers="mouseenter:mouseleave"><i class="fa fa-trash fa-lg"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

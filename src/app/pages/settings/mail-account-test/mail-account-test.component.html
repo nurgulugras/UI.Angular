@@ -1,0 +1,22 @@
+<div class="card card-accent-primary mt-4">
+  <div class="card-body">
+
+    <div class="row">
+      <div class="col">
+        <input type="text" name="text-input" class="form-control" placeholder="Enter test mail address"
+          [class.required]="!isValidForm()" [(ngModel)]="mailTestRequestModel.testMailAddress">
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col text-right">
+        <button type="button" class="btn btn-sm btn-success hidden-hover ml-1" popover="Update this config"
+          [disabled]="!isValidForm()" triggers="mouseenter:mouseleave" (click)="sendTestMail()"><i
+            class="fa fa-envelope fa-lg"></i>&nbsp;Send Test Mail</button>
+      </div>
+    </div>
+
+    <ngx-loading [show]="_isRunning" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+  </div>
+</div>
